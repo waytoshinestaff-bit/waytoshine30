@@ -1,0 +1,1825 @@
+<!DOCTYPE html>
+<html lang="th" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>WAY TO SHINE | Gen-Z Idol & Artist Universe</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Syne, Space Grotesk, Prompt & Kanit for Gen-Z Bilingual Aesthetics -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Kanit:ital,wght@0,400;0,600;0,800;1,700&family=Prompt:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@500;700&family=Syne:wght@700;800&display=swap" rel="stylesheet">
+  
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  
+  <!-- Tone.js for synthesized audio previews & UI sound effects (no external MP3 URLs needed) -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.49/Tone.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Prompt', 'sans-serif'],
+            display: ['Syne', 'Kanit', 'sans-serif'],
+            mono: ['Space Grotesk', 'monospace'],
+          },
+          colors: {
+            cyber: {
+              bg: '#09090F',
+              card: '#13131F',
+              lime: '#CCFF00',
+              pink: '#FF2A85',
+              cyan: '#00F0FF',
+              purple: '#9D4EDD',
+              gold: '#FFD60A'
+            }
+          },
+          animation: {
+            'marquee': 'marquee 22s linear infinite',
+            'float': 'float 4s ease-in-out infinite',
+            'pulse-glow': 'pulseGlow 2.5s infinite',
+            'spin-slow': 'spin 8s linear infinite',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0%)' },
+              '100%': { transform: 'translateX(-50%)' },
+            },
+            float: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-10px)' },
+            },
+            pulseGlow: {
+              '0%, 100%': { opacity: 1, filter: 'drop-shadow(0 0 12px rgba(204,255,0,0.6))' },
+              '50%': { opacity: 0.8, filter: 'drop-shadow(0 0 24px rgba(255,42,133,0.8))' },
+            }
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    body {
+      background-color: #09090F;
+      color: #F8FAFC;
+      overflow-x: hidden;
+      background-image: 
+        radial-gradient(circle at 15% 15%, rgba(255, 42, 133, 0.14) 0%, transparent 38%),
+        radial-gradient(circle at 85% 25%, rgba(0, 240, 255, 0.12) 0%, transparent 40%),
+        radial-gradient(circle at 50% 85%, rgba(204, 255, 0, 0.1) 0%, transparent 45%);
+    }
+
+    /* Y2K Grid Overlay */
+    .bg-cyber-grid {
+      background-size: 40px 40px;
+      background-image: 
+        linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+    }
+
+    /* Glassmorphism & Neo-Brutalism Cards */
+    .glass-panel {
+      background: rgba(19, 19, 31, 0.72);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .neo-brutal-btn {
+      transition: all 0.18s cubic-bezier(0.22, 1, 0.36, 1);
+      box-shadow: 4px 4px 0px #000000;
+    }
+    .neo-brutal-btn:hover {
+      transform: translate(-2px, -2px);
+      box-shadow: 6px 6px 0px #CCFF00;
+    }
+    .neo-brutal-btn:active {
+      transform: translate(2px, 2px);
+      box-shadow: 1px 1px 0px #CCFF00;
+    }
+
+    .neo-brutal-pink:hover {
+      box-shadow: 6px 6px 0px #FF2A85;
+    }
+    .neo-brutal-cyan:hover {
+      box-shadow: 6px 6px 0px #00F0FF;
+    }
+
+    .holo-gradient {
+      background: linear-gradient(135deg, #CCFF00 0%, #00F0FF 48%, #FF2A85 100%);
+    }
+
+    .holo-text {
+      background: linear-gradient(90deg, #CCFF00, #00F0FF, #FF2A85, #CCFF00);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shineText 4s linear infinite;
+    }
+
+    @keyframes shineText {
+      to { background-position: 200% center; }
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #09090F;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #2D2D44;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #FF2A85;
+    }
+
+    /* Sparkle Particle Animation */
+    .sparkle-particle {
+      position: fixed;
+      pointer-events: none;
+      z-index: 9999;
+      animation: popAndFade 0.85s ease-out forwards;
+    }
+    @keyframes popAndFade {
+      0% { transform: translate(0, 0) scale(0.5) rotate(0deg); opacity: 1; }
+      100% { transform: translate(var(--tx), var(--ty)) scale(1.3) rotate(180deg); opacity: 0; }
+    }
+  </style>
+</head>
+<body class="bg-cyber-grid min-h-screen flex flex-col font-sans selection:bg-cyber-lime selection:text-black">
+
+  <!-- TOP Y2K MARQUEE TICKER -->
+  <div class="w-full bg-cyber-lime text-black font-display font-extrabold text-xs sm:text-sm py-1.5 overflow-hidden border-b-2 border-black z-50">
+    <div class="whitespace-nowrap flex animate-marquee">
+      <span class="mx-4">✦ WAY TO SHINE UNIVERSE 2026</span>
+      <span class="mx-4">★ EDN48 1ST SINGLE OUT NOW!</span>
+      <span class="mx-4">✦ TLP48 DEBUT SHOWCASE TICKETS LIVE</span>
+      <span class="mx-4">★ SPARK OF THE MONTH VOTING OPEN — USE YOUR STARS!</span>
+      <span class="mx-4">✦ REDEEM CODE: "SHINE2026" IN EDEN CLUB FOR FREE STAR & TOKEN</span>
+      <span class="mx-4">✦ WAY TO SHINE UNIVERSE 2026</span>
+      <span class="mx-4">★ EDN48 1ST SINGLE OUT NOW!</span>
+      <span class="mx-4">✦ TLP48 DEBUT SHOWCASE TICKETS LIVE</span>
+      <span class="mx-4">★ SPARK OF THE MONTH VOTING OPEN — USE YOUR STARS!</span>
+      <span class="mx-4">✦ REDEEM CODE: "SHINE2026" IN EDEN CLUB FOR FREE STAR & TOKEN</span>
+    </div>
+  </div>
+
+  <!-- MAIN STICKY NAVIGATION HEADER -->
+  <header class="sticky top-0 z-40 glass-panel border-b border-white/10">
+    <div class="max-w-7xl mx-auto px-3 sm:px-6 py-3 flex flex-wrap items-center justify-between gap-3">
+      
+      <!-- Brand Logo -->
+      <button onclick="navigateTo('welcome')" class="flex items-center gap-2.5 group text-left">
+        <div class="w-10 h-10 rounded-2xl holo-gradient p-0.5 shadow-lg group-hover:rotate-6 transition-transform">
+          <div class="w-full h-full bg-cyber-bg rounded-[14px] flex items-center justify-center">
+            <i data-lucide="sparkles" class="w-5 h-5 text-cyber-lime"></i>
+          </div>
+        </div>
+        <div>
+          <span class="font-display font-extrabold text-lg sm:text-xl tracking-tight block leading-none holo-text">WAY TO SHINE</span>
+          <span class="text-[10px] font-mono uppercase tracking-widest text-gray-400">IDOL & ARTIST VERSE</span>
+        </div>
+      </button>
+
+      <!-- Center Navigation Pills (Desktop & Tablet) -->
+      <nav class="hidden lg:flex items-center gap-1.5 bg-black/40 p-1.5 rounded-2xl border border-white/10">
+        <button onclick="navigateTo('welcome')" data-nav="welcome" class="nav-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all">WELCOME</button>
+        <button onclick="navigateTo('edn48')" data-nav="edn48" class="nav-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all">⭐ EDN48</button>
+        <button onclick="navigateTo('tlp48')" data-nav="tlp48" class="nav-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all">🌷 TLP48</button>
+        <button onclick="navigateTo('artist')" data-nav="artist" class="nav-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all">WTS ARTIST</button>
+        <button onclick="navigateTo('edenclub')" data-nav="edenclub" class="nav-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+          <i data-lucide="ticket" class="w-3.5 h-3.5 text-cyber-lime"></i> EDEN CLUB
+        </button>
+        <button onclick="navigateTo('majorvote')" data-nav="majorvote" class="nav-pill px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all flex items-center gap-1">
+          <i data-lucide="trophy" class="w-3.5 h-3.5 text-cyber-pink"></i> MAJOR VOTE
+        </button>
+      </nav>
+
+      <!-- Right Currency Wallet & Account -->
+      <div class="flex items-center gap-2 sm:gap-3">
+        <!-- STAR Balance (For Voting) -->
+        <div onclick="openTopUpModal()" title="STAR ใช้สำหรับโหวต Spark of the Month & Major Vote (คลิกเพื่อรับโบนัส)" class="cursor-pointer flex items-center gap-1.5 bg-cyber-gold/15 hover:bg-cyber-gold/25 border border-cyber-gold/40 px-2.5 sm:px-3 py-1.5 rounded-2xl transition-all">
+          <span class="text-sm">⭐</span>
+          <div class="leading-none">
+            <span class="text-[9px] font-mono text-cyber-gold block">STAR</span>
+            <span id="nav-star-balance" class="font-mono font-bold text-xs sm:text-sm text-white">0</span>
+          </div>
+          <span class="ml-0.5 w-4 h-4 rounded-full bg-cyber-gold text-black font-bold text-xs flex items-center justify-center">+</span>
+        </div>
+
+        <!-- TOKEN Balance (For Shopping) -->
+        <div onclick="navigateTo('edenclub')" title="TOKEN ใช้ซื้อสินค้าใน EDEN CLUB" class="cursor-pointer flex items-center gap-1.5 bg-cyber-cyan/15 hover:bg-cyber-cyan/25 border border-cyber-cyan/40 px-2.5 sm:px-3 py-1.5 rounded-2xl transition-all">
+          <span class="text-sm">🪙</span>
+          <div class="leading-none">
+            <span class="text-[9px] font-mono text-cyber-cyan block">TOKEN</span>
+            <span id="nav-token-balance" class="font-mono font-bold text-xs sm:text-sm text-white">0</span>
+          </div>
+        </div>
+
+        <!-- My Account Button -->
+        <button onclick="navigateTo('account')" data-nav="account" class="nav-pill flex items-center gap-2 bg-white/10 hover:bg-white/20 border border-white/15 px-3 py-1.5 rounded-2xl transition-all">
+          <div id="nav-kami-avatar" class="w-6 h-6 rounded-full bg-gradient-to-tr from-cyber-pink to-cyber-purple flex items-center justify-center text-xs font-bold overflow-hidden border border-cyber-lime">
+            👑
+          </div>
+          <span class="text-xs font-bold hidden sm:inline">My Account</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile Horizontal Scrollable Navigation -->
+    <div class="lg:hidden flex items-center gap-1.5 overflow-x-auto px-3 pb-2.5 no-scrollbar">
+      <button onclick="navigateTo('welcome')" data-nav="welcome" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">WELCOME</button>
+      <button onclick="navigateTo('edn48')" data-nav="edn48" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">⭐ EDN48</button>
+      <button onclick="navigateTo('tlp48')" data-nav="tlp48" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">🌷 TLP48</button>
+      <button onclick="navigateTo('artist')" data-nav="artist" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">WTS ARTIST</button>
+      <button onclick="navigateTo('edenclub')" data-nav="edenclub" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">🎟️ EDEN CLUB</button>
+      <button onclick="navigateTo('majorvote')" data-nav="majorvote" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">🏆 MAJOR VOTE</button>
+      <button onclick="navigateTo('account')" data-nav="account" class="nav-pill shrink-0 px-3 py-1.5 rounded-xl text-xs font-bold">👤 ACCOUNT</button>
+    </div>
+  </header>
+
+  <!-- MAIN DYNAMIC VIEWPORT CONTAINER -->
+  <main id="app-viewport" class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10 pb-28">
+    <!-- Content is dynamically rendered here via JavaScript -->
+  </main>
+
+  <!-- STICKY BOTTOM MINI AUDIO PLAYER (Appears when playing any track from MUSIC AUDIO) -->
+  <div id="mini-audio-player" class="hidden fixed bottom-4 left-4 right-4 max-w-2xl mx-auto z-50 glass-panel border-2 border-cyber-lime/60 rounded-3xl p-3 shadow-2xl shadow-black/80">
+    <div class="flex items-center justify-between gap-3">
+      <div class="flex items-center gap-3 min-w-0">
+        <div id="player-disc" class="w-11 h-11 rounded-2xl holo-gradient flex items-center justify-center shrink-0 animate-spin-slow">
+          <div class="w-4 h-4 rounded-full bg-cyber-bg border-2 border-white"></div>
+        </div>
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5">
+            <span id="player-badge" class="text-[10px] font-mono font-bold px-2 py-0.5 rounded-full bg-cyber-pink text-white">EDN48</span>
+            <span class="text-[10px] font-mono text-cyber-lime animate-pulse">● PLAYING SYNTH PREVIEW</span>
+          </div>
+          <h4 id="player-title" class="font-bold text-sm text-white truncate">Sparkling Rush (1st Single)</h4>
+          <p id="player-artist" class="text-xs text-gray-400 truncate">EDN48 Senbatsu</p>
+        </div>
+      </div>
+      
+      <div class="flex items-center gap-2 shrink-0">
+        <button onclick="togglePlayAudio()" id="player-play-btn" class="w-10 h-10 rounded-2xl bg-cyber-lime text-black flex items-center justify-center hover:scale-105 transition-transform font-bold">
+          <i data-lucide="pause" class="w-5 h-5"></i>
+        </button>
+        <button onclick="stopAudioPlayer()" class="w-9 h-9 rounded-2xl bg-white/10 hover:bg-white/20 text-gray-300 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST NOTIFICATION CONTAINER -->
+  <div id="toast-container" class="fixed top-20 right-4 z-50 flex flex-col gap-2 max-w-xs sm:max-w-sm pointer-events-none"></div>
+
+  <!-- MODAL FOR DAILY CHECK-IN / STAR & TOKEN TOP-UP -->
+  <div id="topup-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="glass-panel border-2 border-cyber-lime rounded-3xl max-w-md w-full p-6 relative animate-float">
+      <button onclick="closeTopUpModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center">
+        <i data-lucide="x" class="w-4 h-4"></i>
+      </button>
+      
+      <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyber-lime/20 text-cyber-lime font-mono text-xs font-bold mb-3">
+        ⚡ FREE GEN-Z FAN REWARDS
+      </div>
+      <h3 class="font-display text-2xl font-extrabold text-white mb-2">เติมพลัง STAR & TOKEN</h3>
+      <p class="text-sm text-gray-300 mb-5">รับโบนัสประจำวันฟรี หรือทดลองเติมแพ็กเกจเพื่อนำไปโหวตเมมเบอร์คนโปรดและช้อปใน EDEN CLUB!</p>
+      
+      <div class="space-y-3">
+        <button onclick="claimDailyBonus()" class="w-full p-4 rounded-2xl bg-gradient-to-r from-cyber-lime to-cyber-cyan text-black font-bold flex items-center justify-between neo-brutal-btn">
+          <div class="text-left">
+            <div class="text-sm font-extrabold">🎁 Daily Fan Check-In</div>
+            <div class="text-xs opacity-80">รับฟรี +50 STAR & +100 TOKEN</div>
+          </div>
+          <span class="px-3 py-1 bg-black text-cyber-lime rounded-xl text-xs font-mono">CLAIM</span>
+        </button>
+
+        <button onclick="addDemoCurrency(200, 300)" class="w-full p-4 rounded-2xl bg-white/10 hover:bg-white/15 border border-white/20 text-white font-bold flex items-center justify-between transition-all">
+          <div class="text-left">
+            <div class="text-sm font-bold text-cyber-pink">🚀 Starter Supporter Pack (Demo)</div>
+            <div class="text-xs text-gray-300">+200 ⭐ STAR & +300 🪙 TOKEN</div>
+          </div>
+          <span class="px-3 py-1 bg-cyber-pink text-white rounded-xl text-xs font-mono">FREE DEMO</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL FOR MEMBER DETAIL & VOTING -->
+  <div id="member-modal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div id="member-modal-content" class="glass-panel border-2 border-cyber-pink rounded-3xl max-w-lg w-full p-6 relative my-auto">
+      <!-- Populated dynamically -->
+    </div>
+  </div>
+
+  <!-- MODAL FOR CUSTOM CONFIRMATION (RESET SYSTEM) -->
+  <div id="reset-modal" class="hidden fixed inset-0 z-50 bg-black/85 backdrop-blur-md flex items-center justify-center p-4">
+    <div class="glass-panel border-2 border-red-500 rounded-3xl max-w-md w-full p-6 relative text-center shadow-2xl">
+      <div class="w-16 h-16 mx-auto rounded-2xl bg-red-500/20 border border-red-500/40 flex items-center justify-center text-3xl mb-4">
+        🔄
+      </div>
+      <h3 class="font-display text-2xl font-extrabold text-white mb-2">ยืนยันการรีเซ็ตข้อมูลทั้งหมด?</h3>
+      <p class="text-xs sm:text-sm text-gray-300 mb-6 leading-relaxed">
+        ระบบจะล้างค่า <span class="text-cyber-gold font-bold">STAR</span>, <span class="text-cyber-cyan font-bold">TOKEN</span>, รายชื่อ <span class="text-cyber-pink font-bold">Oshi / Kami Oshi</span>, โค้ดที่ใช้แล้ว และคะแนนโหวตทั้งหมดกลับสู่ค่าเริ่มต้นใหม่ทั้งหมด
+      </p>
+      <div class="grid grid-cols-2 gap-3">
+        <button onclick="closeResetModal()" class="py-3 rounded-2xl bg-white/10 hover:bg-white/20 text-white font-bold text-xs sm:text-sm transition-all">
+          ยกเลิก
+        </button>
+        <button onclick="executeSystemReset()" class="py-3 rounded-2xl bg-red-600 hover:bg-red-500 text-white font-extrabold text-xs sm:text-sm shadow-lg transition-all">
+          รีเซ็ตทันที!
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- APPLICATION LOGIC & DATA -->
+  <script>
+    // =========================================================================
+    // 1. DATABASE: GROUPS, MEMBERS, TRACKS, SCHEDULES, SHOP & REDEEM CODES
+    // =========================================================================
+    const GROUPS_DATA = {
+      edn48: {
+        id: 'edn48',
+        name: 'EDN48',
+        fullName: 'EDEN48 THAILAND',
+        symbol: '⭐',
+        symbolLabel: 'STAR EMBLEM',
+        tagline: 'Shining Bright Like Shooting Stars in Your Universe ⭐✨',
+        themeColor: '#FFD60A',
+        accentClass: 'text-cyber-gold',
+        badgeBg: 'bg-cyber-gold text-black',
+        borderAccent: 'border-cyber-gold/50',
+        gradient: 'from-cyber-gold via-amber-500 to-pink-600',
+        banners: [
+          {
+            tag: '⭐ 1ST SINGLE DEBUT',
+            title: 'EDN48 1st Single "SPARKLING RUSH" Starlight Handshake & Mini Concert',
+            date: '14 DEC 2026 • UNION HALL, BANGKOK',
+            desc: 'ร่วมสัมผัสประกายแสงดาวครั้งแรกอย่างเป็นทางการ พร้อมกิจกรรมจับมือและไฮทัชครบทุกเมมเบอร์!',
+            bg: 'from-amber-500/80 via-pink-900/90 to-black'
+          },
+          {
+            tag: '✦ STARLIGHT THEATER',
+            title: 'EDN48 Digital Theater Stage: "CONSTELLATION DREAM"',
+            date: 'EVERY SAT-SUN • EDEN STAR DOME',
+            desc: 'สเตจประจำสัปดาห์สุดเอ็กซ์คลูซีฟ พร้อมโชว์ยูนิตพิเศษใต้แสงดาวที่ไม่เคยแสดงที่ไหนมาก่อน',
+            bg: 'from-yellow-600/80 via-purple-900/90 to-black'
+          }
+        ],
+        schedule: [
+          { date: '28 NOV', time: '18:00', title: 'EDN48 Starlight Streaming: Pre-Single Countdown', location: 'Official YouTube & App', type: '⭐ LIVE' },
+          { date: '05 DEC', time: '14:00', title: 'Star Roadshow Mini Live @ Siam Center', location: 'Atrium 1, Siam Center', type: '✦ EVENT' },
+          { date: '14 DEC', time: '11:00', title: '1st Single "SPARKLING RUSH" Handshake Festival', location: 'Union Hall, 6F Union Mall', type: '⭐ HANDSHAKE' },
+          { date: '24 DEC', time: '19:30', title: 'EDN48 X-Mas Starry Night Fanmeet', location: 'KBank Siam Pic-Ganesha', type: '✦ FANMEET' }
+        ],
+        single: {
+          title: 'EDN48 1st SINGLE — "SPARKLING RUSH"',
+          releaseDate: 'Released: November 2026',
+          center: 'Mina (มินะ) ⭐',
+          coverGradient: 'from-cyber-gold via-amber-500 to-cyber-pink',
+          description: 'ซิงเกิลเปิดตัวสุดเปล่งประกายสไตล์ Hyper-Pop ผสมผสานจังหวะ J-Idol สุดคึกคัก ถ่ายทอดพลังแห่งดวงดาวของเด็กสาวทั้ง 6 คนที่พร้อมส่องสว่างบนเวที!',
+          tracks: [
+            { id: 'edn-t1', title: '01. Sparkling Rush (Main Track)', duration: '03:42', tempo: 142, notes: ['C5', 'E5', 'G5', 'B5', 'A5', 'G5', 'E5', 'D5'] },
+            { id: 'edn-t2', title: '02. Shooting Star Heartbeat (Coupling Song)', duration: '03:18', tempo: 128, notes: ['A4', 'C5', 'E5', 'G5', 'F5', 'E5', 'C5', 'B4'] },
+            { id: 'edn-t3', title: '03. ทางเดินแห่งแสงดาว (Way To Shine Ver.)', duration: '04:05', tempo: 118, notes: ['G4', 'B4', 'D5', 'G5', 'F#5', 'D5', 'B4', 'A4'] }
+          ]
+        },
+        socials: {
+          instagram: 'https://instagram.com',
+          tiktok: 'https://tiktok.com',
+          twitter: 'https://x.com',
+          youtube: 'https://youtube.com',
+          facebook: 'https://facebook.com'
+        }
+      },
+      tlp48: {
+        id: 'tlp48',
+        name: 'TLP48',
+        fullName: 'TULIP48 THAILAND',
+        symbol: '🌷',
+        symbolLabel: 'TULIP EMBLEM',
+        tagline: 'Blooming Cyber Tulips & Future Pop Sensation 🌷💖',
+        themeColor: '#FF2A85',
+        accentClass: 'text-cyber-pink',
+        badgeBg: 'bg-gradient-to-r from-cyber-pink to-emerald-400 text-white',
+        borderAccent: 'border-cyber-pink/50',
+        gradient: 'from-cyber-pink via-rose-500 to-emerald-500',
+        banners: [
+          {
+            tag: '🌷 DEBUT SHOWCASE',
+            title: 'TLP48 1st Single "CYBER TULIP" Blooming Debut Showcase',
+            date: '20 DEC 2026 • CENTRALWORLD LIVE',
+            desc: 'เตรียมพบกับความงดงามของทุ่งดอกทิวลิปไซเบอร์และเพอร์ฟอร์แมนซ์สุดแข็งแรงจากสาวๆ TLP48 รุ่นที่ 1!',
+            bg: 'from-pink-600/85 via-rose-900/90 to-emerald-950'
+          },
+          {
+            tag: '🌷 FAN EVENT',
+            title: 'TLP48 First Tulip Photobook & Hi-Touch Session',
+            date: '10 JAN 2027 • SAMYAN MITRTOWN HALL',
+            desc: 'รับโฟโต้บุ๊คธีมดอกทิวลิปพร้อมลายเซ็นสดจากมือเมมเบอร์คนโปรดของคุณ',
+            bg: 'from-emerald-600/80 via-pink-900/90 to-black'
+          }
+        ],
+        schedule: [
+          { date: '30 NOV', time: '17:00', title: 'TLP48 Tulip Garden Dance Practice & Q&A Live', location: 'TikTok Live @TLP48_Official', type: '🌷 LIVE' },
+          { date: '12 DEC', time: '15:00', title: 'TLP48 Cyber Tulip Pop-Up Cafe & Merch Launch', location: 'Siam Square Soi 7', type: '🌷 EVENT' },
+          { date: '20 DEC', time: '18:00', title: '1st Single "CYBER TULIP" Grand Showcase', location: 'CentralWorld Live, 8F', type: '🌷 SHOWCASE' },
+          { date: '31 DEC', time: '22:00', title: 'Blooming Countdown Festival 2027 Stage', location: 'ICONSIAM River Park', type: '🌷 CONCERT' }
+        ],
+        single: {
+          title: 'TLP48 1st SINGLE — "CYBER TULIP"',
+          releaseDate: 'Released: November 2026',
+          center: 'Kira (คิร่า) 🌷',
+          coverGradient: 'from-cyber-pink via-rose-400 to-emerald-400',
+          description: 'ซิงเกิลแรกจาก TLP48 ที่ถ่ายทอดความงามอันทรงพลังของดอกทิวลิปแห่งอนาคต ผสานซาวด์ Synthwave & Future Bass สุดละมุนแต่หนักแน่น',
+          tracks: [
+            { id: 'tlp-t1', title: '01. Cyber Tulip (Title Track)', duration: '03:35', tempo: 136, notes: ['E4', 'G4', 'B4', 'E5', 'D5', 'B4', 'G4', 'F#4'] },
+            { id: 'tlp-t2', title: '02. Blooming in Neon', duration: '03:24', tempo: 130, notes: ['D5', 'F#5', 'A5', 'D6', 'C#6', 'A5', 'F#5', 'E5'] },
+            { id: 'tlp-t3', title: '03. Tulip Petal Mirage (Acoustic Synth)', duration: '03:50', tempo: 110, notes: ['C4', 'G4', 'B4', 'E5', 'D5', 'B4', 'G4', 'E4'] }
+          ]
+        },
+        socials: {
+          instagram: 'https://instagram.com',
+          tiktok: 'https://tiktok.com',
+          twitter: 'https://x.com',
+          youtube: 'https://youtube.com',
+          facebook: 'https://facebook.com'
+        }
+      }
+    };
+
+    // MEMBERS DATABASE (Includes Stage Name, Real Name, Age, IG Handle, Group, Initial Votes, Avatar Gradient & Emoji/SVG)
+    const INITIAL_MEMBERS = [
+      // EDN48 Members (6 Members)
+      { id: 'edn-1', group: 'EDN48', name: 'Mina', thaiName: 'มินะ', realName: 'พิชญธิดา วรโชติ (Pitchayathida Worachot)', age: 19, ig: '@mina.edn48', role: 'Center / Captain', color: 'from-pink-500 to-rose-400', emoji: '🎀', votes: 1420 },
+      { id: 'edn-2', group: 'EDN48', name: 'Yuki', thaiName: 'ยูกิ', realName: 'ณัฐณิชา รัตนากร (Natnicha Rattanakorn)', age: 18, ig: '@yuki.edn48', role: 'Main Vocal', color: 'from-purple-500 to-indigo-400', emoji: '🦄', votes: 1295 },
+      { id: 'edn-3', group: 'EDN48', name: 'Pimmy', thaiName: 'พิมมี่', realName: 'พิมพ์ชนก สุวรรณมาลี (Pimchanok Suwanmalee)', age: 20, ig: '@pimmy.edn48', role: 'Lead Dancer', color: 'from-amber-400 to-orange-500', emoji: '🍑', votes: 1180 },
+      { id: 'edn-4', group: 'EDN48', name: 'Lina', thaiName: 'ลิน่า', realName: 'ลลิตา เจริญสุข (Lalita Charoensuk)', age: 17, ig: '@lina.edn48', role: 'Visual / Maknae', color: 'from-emerald-400 to-teal-500', emoji: '🍀', votes: 1090 },
+      { id: 'edn-5', group: 'EDN48', name: 'Cherie', thaiName: 'เชอรี', realName: 'ชญานิศ กิตติวัฒน์ (Chayanit Kittiwat)', age: 21, ig: '@cherie.edn48', role: 'Main Rapper', color: 'from-red-500 to-pink-600', emoji: '🍒', votes: 985 },
+      { id: 'edn-6', group: 'EDN48', name: 'Nana', thaiName: 'นานะ', realName: 'นันทพร อัครเดช (Nanthaporn Akkharadet)', age: 18, ig: '@nana.edn48', role: 'All-Rounder', color: 'from-sky-400 to-blue-500', emoji: '🦋', votes: 940 },
+
+      // TLP48 Members (6 Members)
+      { id: 'tlp-1', group: 'TLP48', name: 'Kira', thaiName: 'คิร่า', realName: 'กัญญาวีร์ ธนากูล (Kanyawee Thanakul)', age: 20, ig: '@kira.tlp48', role: 'Center / Main Dancer', color: 'from-cyan-400 to-blue-600', emoji: '⚡', votes: 1380 },
+      { id: 'tlp-2', group: 'TLP48', name: 'Sora', thaiName: 'โซระ', realName: 'สรัลชนา ปัญญาวงศ์ (Saranchana Panyawong)', age: 19, ig: '@sora.tlp48', role: 'Main Vocal', color: 'from-teal-400 to-emerald-500', emoji: '🌊', votes: 1240 },
+      { id: 'tlp-3', group: 'TLP48', name: 'Momo', thaiName: 'โมโมะ', realName: 'มนัสนันท์ ศิริวัฒน์ (Manassanan Siriwat)', age: 18, ig: '@momo.tlp48', role: 'Lead Vocal', color: 'from-fuchsia-500 to-pink-500', emoji: '🌷', votes: 1150 },
+      { id: 'tlp-4', group: 'TLP48', name: 'Faye', thaiName: 'เฟย์', realName: 'ฟ้ารุ่ง วงศ์สวัสดิ์ (Farung Wongsawat)', age: 21, ig: '@faye.tlp48', role: 'Captain / Rapper', color: 'from-violet-500 to-purple-600', emoji: '🔮', votes: 1060 },
+      { id: 'tlp-5', group: 'TLP48', name: 'Belle', thaiName: 'เบลล์', realName: 'เบญญาภา ธีระโชติ (Benyapa Thirachot)', age: 17, ig: '@belle.tlp48', role: 'Visual', color: 'from-lime-400 to-green-500', emoji: '🍏', votes: 990 },
+      { id: 'tlp-6', group: 'TLP48', name: 'Tori', thaiName: 'โทริ', realName: 'ธนพร มณีรัตน์ (Thanaporn Maneerat)', age: 18, ig: '@tori.tlp48', role: 'Sub Vocal', color: 'from-yellow-400 to-amber-500', emoji: '🌟', votes: 910 },
+
+      // WAY TO SHINE SOLO ARTISTS (3 Artists)
+      { id: 'art-1', group: 'WTS ARTIST', name: 'ZYNX', thaiName: 'ซิงซ์', realName: 'ศิรินทร์ ภักดี (Sirin Phakdee)', age: 22, ig: '@zynx.wts', role: 'R&B / Alt-Pop Soloist', color: 'from-lime-400 via-cyan-400 to-blue-500', emoji: '🎧', votes: 1510 },
+      { id: 'art-2', group: 'WTS ARTIST', name: 'NOVA-K', thaiName: 'โนวาเค', realName: 'กฤตภาส จันทร์เพ็ญ (Krittapas Chanpen)', age: 23, ig: '@novak.wts', role: 'Synth-Rock Singer-Songwriter', color: 'from-orange-500 via-pink-500 to-purple-600', emoji: '🎸', votes: 1320 },
+      { id: 'art-3', group: 'WTS ARTIST', name: 'LUNA V', thaiName: 'ลูน่า วี', realName: 'วรัญญา นภาลัย (Waranya Napalai)', age: 21, ig: '@lunav.wts', role: 'Hyperpop Producer & Vocal', color: 'from-indigo-400 via-purple-500 to-pink-500', emoji: '🛸', votes: 1210 }
+    ];
+
+    // EDEN CLUB SHOP ITEMS (Purchased with TOKEN)
+    const SHOP_ITEMS = [
+      { id: 'shop-1', name: 'EDN48 1st Single Digital Photocard Pack', category: 'DIGITAL CARD', price: 120, badge: 'HOT', emoji: '🃏', desc: 'สุ่มการ์ดดิจิทัลพร้อมเสียงปลุกสุดคิวท์จากเมมเบอร์ EDN48' },
+      { id: 'shop-2', name: 'TLP48 Cyber Tulip Lightstick Skin', category: 'APP BADGE', price: 200, badge: 'LIMITED', emoji: '🪄', desc: 'ธีมแท่งไฟเรืองแสงพิเศษสำหรับแสดงในหน้าโปรไฟล์และห้องแชท' },
+      { id: 'shop-3', name: 'Handshake Event Fast-Pass Ticket', category: 'EVENT PASS', price: 350, badge: 'VIP', emoji: '🎟️', desc: 'บัตรช่องทางพิเศษเข้าเลนจับมือ EDN48 & TLP48 แบบไม่ต้องรอคิว' },
+      { id: 'shop-4', name: 'Way To Shine Y2K Hologram Hoodie', category: 'MERCH', price: 500, badge: 'PHYSICAL', emoji: '🧥', desc: 'เสื้อฮู้ดดี้รุ่นลิมิเต็ดปักโลโก้โฮโลแกรม จัดส่งฟรีถึงบ้าน' }
+    ];
+
+    // VALID REDEEM CODES IN EDEN CLUB
+    const REDEEM_CODES = {
+      'SHINE2026': { star: 100, token: 200, label: 'Welcome Way To Shine 2026 Pack!' },
+      'EDN48STAR': { star: 150, token: 50, label: '⭐ EDN48 Starlight 1st Single Boost!' },
+      'TLP48TULIP': { star: 150, token: 50, label: '🌷 TLP48 Blooming Tulip Debut Pack!' },
+      'GENZTOKEN': { star: 50, token: 300, label: 'Eden Club Shopping Spree Token!' }
+    };
+
+    // =========================================================================
+    // 2. STATE MANAGEMENT (Persisted in localStorage)
+    // =========================================================================
+    const defaultState = {
+      currentView: 'welcome',
+      stars: 250,
+      tokens: 400,
+      oshiIds: ['edn-1', 'tlp-1'],
+      kamiOshiId: 'edn-1',
+      members: JSON.parse(JSON.stringify(INITIAL_MEMBERS)),
+      redeemedCodes: [],
+      ownedItems: [],
+      history: [
+        { time: 'เริ่มต้นระบบ', text: 'รับโบนัสสมาชิกใหม่ +250 ⭐ STAR และ +400 🪙 TOKEN' }
+      ]
+    };
+
+    let appState = loadState();
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem('wayToShineState_v1');
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return { ...defaultState, ...parsed };
+        }
+      } catch (e) {
+        console.warn('LocalStorage unavailable, using memory state');
+      }
+      return JSON.parse(JSON.stringify(defaultState));
+    }
+
+    function saveState() {
+      try {
+        localStorage.setItem('wayToShineState_v1', JSON.stringify(appState));
+      } catch (e) {
+        console.warn('Could not persist state');
+      }
+      updateTopBarUI();
+    }
+
+    // =========================================================================
+    // 3. AUDIO SYNTH ENGINE (Tone.js for MUSIC AUDIO menu previews & UI FX)
+    // =========================================================================
+    let synth = null;
+    let audioLoop = null;
+    let isPlayingAudio = false;
+    let currentTrack = null;
+
+    function initSynth() {
+      if (!synth && typeof Tone !== 'undefined') {
+        synth = new Tone.PolySynth(Tone.Synth, {
+          oscillator: { type: 'triangle' },
+          envelope: { attack: 0.02, decay: 0.15, sustain: 0.2, release: 0.6 }
+        }).toDestination();
+        synth.volume.value = -8;
+      }
+    }
+
+    function playUISound(note = 'C6') {
+      try {
+        initSynth();
+        if (synth && Tone.context.state === 'running') {
+          synth.triggerAttackRelease(note, '16n');
+        }
+      } catch (e) {}
+    }
+
+    async function playTrackPreview(groupName, trackId) {
+      try {
+        await Tone.start();
+        initSynth();
+
+        let trackObj = null;
+        Object.values(GROUPS_DATA).forEach(g => {
+          const found = g.single.tracks.find(t => t.id === trackId);
+          if (found) trackObj = { ...found, group: g.name };
+        });
+        if (!trackObj) return;
+
+        if (audioLoop) {
+          audioLoop.stop();
+          audioLoop.dispose();
+        }
+
+        currentTrack = trackObj;
+        isPlayingAudio = true;
+
+        let step = 0;
+        Tone.Transport.bpm.value = trackObj.tempo;
+        audioLoop = new Tone.Loop((time) => {
+          const note = trackObj.notes[step % trackObj.notes.length];
+          synth.triggerAttackRelease(note, '8n', time);
+          step++;
+        }, '8n').start(0);
+
+        if (Tone.Transport.state !== 'started') {
+          Tone.Transport.start();
+        }
+
+        // Update Mini Player UI
+        document.getElementById('mini-audio-player').classList.remove('hidden');
+        document.getElementById('player-badge').textContent = trackObj.group;
+        document.getElementById('player-title').textContent = trackObj.title;
+        document.getElementById('player-artist').textContent = `${trackObj.group} • 1st Single Audio Preview`;
+        updatePlayButtonIcon();
+        showToast(`🎵 กำลังเล่น: ${trackObj.title}`, 'lime');
+      } catch (err) {
+        showToast('ไม่สามารถเล่นเสียงได้ กรุณาแตะหน้าจออีกครั้ง', 'pink');
+      }
+    }
+
+    function togglePlayAudio() {
+      if (!currentTrack) return;
+      if (isPlayingAudio) {
+        Tone.Transport.pause();
+        isPlayingAudio = false;
+      } else {
+        Tone.Transport.start();
+        isPlayingAudio = true;
+      }
+      updatePlayButtonIcon();
+    }
+
+    function stopAudioPlayer() {
+      if (audioLoop) {
+        audioLoop.stop();
+        audioLoop.dispose();
+        audioLoop = null;
+      }
+      Tone.Transport.stop();
+      isPlayingAudio = false;
+      currentTrack = null;
+      document.getElementById('mini-audio-player').classList.add('hidden');
+    }
+
+    function updatePlayButtonIcon() {
+      const btn = document.getElementById('player-play-btn');
+      const disc = document.getElementById('player-disc');
+      if (!btn) return;
+      btn.innerHTML = isPlayingAudio 
+        ? '<i data-lucide="pause" class="w-5 h-5"></i>' 
+        : '<i data-lucide="play" class="w-5 h-5"></i>';
+      if (isPlayingAudio) {
+        disc.classList.add('animate-spin-slow');
+      } else {
+        disc.classList.remove('animate-spin-slow');
+      }
+      lucide.createIcons();
+    }
+
+    // =========================================================================
+    // 4. INTERACTIVE ACTIONS: OSHI, KAMI OSHI, VOTING, REDEEM, SHOP
+    // =========================================================================
+    function toggleOshi(memberId, event) {
+      if (event) event.stopPropagation();
+      const member = appState.members.find(m => m.id === memberId);
+      if (!member) return;
+
+      const idx = appState.oshiIds.indexOf(memberId);
+      if (idx > -1) {
+        appState.oshiIds.splice(idx, 1);
+        // If removed from Oshi and was Kami Oshi, clear Kami Oshi too
+        if (appState.kamiOshiId === memberId) {
+          appState.kamiOshiId = null;
+        }
+        showToast(`นำ ${member.name} (${member.thaiName}) ออกจากลิสต์ Oshi แล้ว`, 'info');
+      } else {
+        appState.oshiIds.push(memberId);
+        spawnSparkles(event, '💖');
+        playUISound('E6');
+        showToast(`💖 เพิ่ม ${member.name} (${member.thaiName}) เป็น Oshi ของคุณแล้ว!`, 'pink');
+      }
+      saveState();
+      renderCurrentView();
+    }
+
+    function setKamiOshi(memberId, event) {
+      if (event) event.stopPropagation();
+      const member = appState.members.find(m => m.id === memberId);
+      if (!member) return;
+
+      if (appState.kamiOshiId === memberId) {
+        appState.kamiOshiId = null;
+        showToast(`ยกเลิกสถานะ Kami Oshi ของ ${member.name} แล้ว`, 'info');
+      } else {
+        appState.kamiOshiId = memberId;
+        // Automatically include in Oshi list if not already there
+        if (!appState.oshiIds.includes(memberId)) {
+          appState.oshiIds.push(memberId);
+        }
+        appState.history.unshift({
+          time: getCurrentTimeStr(),
+          text: `👑 แต่งตั้ง ${member.name} (${member.group}) เป็น KAMI OSHI!`
+        });
+        spawnSparkles(event, '👑');
+        playUISound('G6');
+        showToast(`👑 แต่งตั้ง ${member.name} เป็น KAMI OSHI อันดับ 1 เรียบร้อย!`, 'lime');
+      }
+      saveState();
+      renderCurrentView();
+    }
+
+    function voteMember(memberId, starCost = 10, event) {
+      if (event) event.stopPropagation();
+      const member = appState.members.find(m => m.id === memberId);
+      if (!member) return;
+
+      if (appState.stars < starCost) {
+        showToast(`⭐ STAR ไม่พอ! ต้องการ ${starCost} STAR (คลิกปุ่ม + ด้านบนเพื่อรับฟรี)`, 'pink');
+        openTopUpModal();
+        return;
+      }
+
+      appState.stars -= starCost;
+      member.votes += starCost;
+      appState.history.unshift({
+        time: getCurrentTimeStr(),
+        text: `⭐ โหวต ${starCost} STAR ให้ ${member.name} (${member.group})`
+      });
+
+      spawnSparkles(event, '⭐');
+      playUISound('A6');
+      showToast(`⭐ โหวต +${starCost} คะแนนให้ ${member.name} สำเร็จ!`, 'lime');
+      saveState();
+      renderCurrentView();
+    }
+
+    function handleRedeemCode(e) {
+      e.preventDefault();
+      const input = document.getElementById('redeem-input');
+      if (!input) return;
+      const code = input.value.trim().toUpperCase();
+
+      if (!code) {
+        showToast('กรุณากรอกโค้ดก่อนกดยืนยัน', 'pink');
+        return;
+      }
+
+      if (appState.redeemedCodes.includes(code)) {
+        showToast(`โค้ด "${code}" ถูกใช้งานไปแล้ว!`, 'pink');
+        return;
+      }
+
+      const reward = REDEEM_CODES[code];
+      if (!reward) {
+        showToast(`ไม่พบโค้ด "${code}" ลองใช้ SHINE2026 หรือ EDN48STAR`, 'pink');
+        return;
+      }
+
+      appState.redeemedCodes.push(code);
+      appState.stars += reward.star;
+      appState.tokens += reward.token;
+      appState.history.unshift({
+        time: getCurrentTimeStr(),
+        text: `🎟️ Redeem Code "${code}": +${reward.star} ⭐ STAR, +${reward.token} 🪙 TOKEN`
+      });
+
+      input.value = '';
+      playUISound('C6');
+      showToast(`🎉 แลกโค้ดสำเร็จ! รับ +${reward.star} STAR & +${reward.token} TOKEN`, 'lime');
+      saveState();
+      renderCurrentView();
+    }
+
+    function buyShopItem(itemId) {
+      const item = SHOP_ITEMS.find(i => i.id === itemId);
+      if (!item) return;
+
+      if (appState.tokens < item.price) {
+        showToast(`🪙 TOKEN ไม่พอ! ต้องการ ${item.price} TOKEN`, 'pink');
+        return;
+      }
+
+      appState.tokens -= item.price;
+      appState.ownedItems.push({ ...item, purchasedAt: getCurrentTimeStr() });
+      appState.history.unshift({
+        time: getCurrentTimeStr(),
+        text: `🛍️ ซื้อ "${item.name}" (-${item.price} 🪙 TOKEN)`
+      });
+
+      playUISound('E6');
+      showToast(`🛍️ แลกซื้อ "${item.name}" สำเร็จ!`, 'cyan');
+      saveState();
+      renderCurrentView();
+    }
+
+    function claimDailyBonus() {
+      appState.stars += 50;
+      appState.tokens += 100;
+      appState.history.unshift({
+        time: getCurrentTimeStr(),
+        text: `🎁 Daily Check-in: รับฟรี +50 ⭐ STAR & +100 🪙 TOKEN`
+      });
+      saveState();
+      closeTopUpModal();
+      showToast('🎁 รับโบนัสประจำวัน +50 STAR และ +100 TOKEN สำเร็จ!', 'lime');
+    }
+
+    function addDemoCurrency(stars, tokens) {
+      appState.stars += stars;
+      appState.tokens += tokens;
+      appState.history.unshift({
+        time: getCurrentTimeStr(),
+        text: `🚀 เติมแพ็กเกจ Demo: +${stars} ⭐ STAR & +${tokens} 🪙 TOKEN`
+      });
+      saveState();
+      closeTopUpModal();
+      showToast(`🚀 เติม +${stars} STAR และ +${tokens} TOKEN เรียบร้อย!`, 'lime');
+    }
+
+    function openResetModal() {
+      document.getElementById('reset-modal').classList.remove('hidden');
+    }
+
+    function closeResetModal() {
+      document.getElementById('reset-modal').classList.add('hidden');
+    }
+
+    function executeSystemReset() {
+      try {
+        localStorage.removeItem('wayToShineState_v1');
+      } catch (e) {}
+
+      // Stop any playing audio cleanly
+      stopAudioPlayer();
+
+      // Re-initialize fresh state
+      appState = JSON.parse(JSON.stringify(defaultState));
+      appState.history = [
+        { time: getCurrentTimeStr(), text: '🔄 รีเซ็ตระบบเรียบร้อย! เริ่มต้นใหม่ด้วย +250 ⭐ STAR และ +400 🪙 TOKEN' }
+      ];
+
+      saveState();
+      closeResetModal();
+      playUISound('C6');
+      showToast('🔄 รีเซ็ตข้อมูลทั้งหมดกลับสู่ค่าเริ่มต้นเรียบร้อยแล้ว!', 'lime');
+      renderCurrentView();
+    }
+
+    // =========================================================================
+    // 5. NAVIGATION & UI HELPERS
+    // =========================================================================
+    function navigateTo(view) {
+      appState.currentView = view;
+      saveState();
+      renderCurrentView();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function getGroupEmblem(groupName) {
+      if (groupName === 'EDN48') return '⭐';
+      if (groupName === 'TLP48') return '🌷';
+      return '🎧';
+    }
+
+    function updateTopBarUI() {
+      document.getElementById('nav-star-balance').textContent = appState.stars.toLocaleString();
+      document.getElementById('nav-token-balance').textContent = appState.tokens.toLocaleString();
+
+      // Update Kami Oshi mini avatar in top nav
+      const kami = appState.members.find(m => m.id === appState.kamiOshiId);
+      const navAvatar = document.getElementById('nav-kami-avatar');
+      if (navAvatar) {
+        navAvatar.textContent = kami ? getGroupEmblem(kami.group) : '👑';
+      }
+
+      // Highlight active nav pill
+      document.querySelectorAll('.nav-pill').forEach(btn => {
+        const target = btn.getAttribute('data-nav');
+        if (target === appState.currentView) {
+          btn.classList.add('bg-cyber-lime', 'text-black', 'shadow-md');
+          btn.classList.remove('text-gray-300', 'hover:bg-white/10');
+        } else {
+          btn.classList.remove('bg-cyber-lime', 'text-black', 'shadow-md');
+          btn.classList.add('text-gray-300', 'hover:bg-white/10');
+        }
+      });
+    }
+
+    function showToast(message, type = 'lime') {
+      const container = document.getElementById('toast-container');
+      const toast = document.createElement('div');
+      const borderColors = {
+        lime: 'border-cyber-lime text-white',
+        pink: 'border-cyber-pink text-white',
+        cyan: 'border-cyber-cyan text-white',
+        info: 'border-white/30 text-gray-200'
+      };
+      toast.className = `pointer-events-auto glass-panel border-2 ${borderColors[type] || borderColors.lime} px-4 py-3 rounded-2xl shadow-2xl text-xs sm:text-sm font-semibold flex items-center gap-2 transition-all transform translate-x-0`;
+      toast.innerHTML = `<span>${message}</span>`;
+      container.appendChild(toast);
+
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(20px)';
+        setTimeout(() => toast.remove(), 300);
+      }, 3000);
+    }
+
+    function spawnSparkles(event, symbol = '⭐') {
+      const x = event && event.clientX ? event.clientX : window.innerWidth / 2;
+      const y = event && event.clientY ? event.clientY : window.innerHeight / 2;
+
+      for (let i = 0; i < 7; i++) {
+        const p = document.createElement('div');
+        p.className = 'sparkle-particle text-lg';
+        p.textContent = symbol;
+        p.style.left = `${x}px`;
+        p.style.top = `${y}px`;
+        const angle = (Math.PI * 2 * i) / 7;
+        const dist = 45 + Math.random() * 45;
+        p.style.setProperty('--tx', `${Math.cos(angle) * dist}px`);
+        p.style.setProperty('--ty', `${Math.sin(angle) * dist - 20}px`);
+        document.body.appendChild(p);
+        setTimeout(() => p.remove(), 850);
+      }
+    }
+
+    function openTopUpModal() {
+      document.getElementById('topup-modal').classList.remove('hidden');
+    }
+    function closeTopUpModal() {
+      document.getElementById('topup-modal').classList.add('hidden');
+    }
+
+    function openMemberModal(memberId) {
+      const m = appState.members.find(x => x.id === memberId);
+      if (!m) return;
+      const isOshi = appState.oshiIds.includes(m.id);
+      const isKami = appState.kamiOshiId === m.id;
+
+      const modal = document.getElementById('member-modal');
+      const content = document.getElementById('member-modal-content');
+      content.innerHTML = `
+        <button onclick="closeMemberModal()" class="absolute top-4 right-4 w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center">
+          <i data-lucide="x" class="w-4 h-4"></i>
+        </button>
+
+        <div class="flex flex-col sm:flex-row items-center gap-5 mb-6">
+          <div class="w-24 h-24 rounded-3xl bg-gradient-to-br ${m.color} flex items-center justify-center text-5xl shadow-xl border-2 border-white/30 shrink-0">
+            ${m.emoji}
+          </div>
+          <div class="text-center sm:text-left">
+            <div class="flex flex-wrap items-center justify-center sm:justify-start gap-2 mb-1">
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold bg-white/15 text-cyber-lime">${getGroupEmblem(m.group)} ${m.group}</span>
+              <span class="px-2.5 py-0.5 rounded-full text-[10px] font-mono bg-cyber-pink/20 text-cyber-pink">${m.role}</span>
+            </div>
+            <h3 class="font-display text-2xl sm:text-3xl font-extrabold text-white">${m.name} <span class="text-lg font-sans font-semibold text-gray-300">(${m.thaiName})</span></h3>
+            <p class="text-xs text-gray-400 mt-1">ชื่อจริง: <span class="text-gray-200">${m.realName}</span></p>
+            <p class="text-xs text-gray-400">อายุ: <span class="text-cyber-cyan font-bold">${m.age} ปี</span> • IG: <a href="https://instagram.com/${m.ig.replace('@','')}" target="_blank" class="text-cyber-pink underline hover:text-cyber-lime">${m.ig}</a></p>
+          </div>
+        </div>
+
+        <div class="grid grid-cols-2 gap-3 mb-5">
+          <button onclick="toggleOshi('${m.id}', event); openMemberModal('${m.id}')" class="p-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border transition-all ${isOshi ? 'bg-cyber-pink text-white border-cyber-pink' : 'bg-white/5 text-gray-300 border-white/15 hover:bg-white/10'}">
+            <span>${isOshi ? '💖 Oshi แล้ว' : '🤍 เพิ่มเป็น Oshi'}</span>
+          </button>
+          <button onclick="setKamiOshi('${m.id}', event); openMemberModal('${m.id}')" class="p-3 rounded-2xl font-bold text-xs sm:text-sm flex items-center justify-center gap-2 border transition-all ${isKami ? 'bg-cyber-lime text-black border-cyber-lime' : 'bg-white/5 text-gray-300 border-white/15 hover:bg-white/10'}">
+            <span>${isKami ? '👑 KAMI OSHI' : '👑 ตั้งเป็น Kami Oshi'}</span>
+          </button>
+        </div>
+
+        <div class="bg-black/40 rounded-2xl p-4 border border-white/10">
+          <div class="flex items-center justify-between mb-3">
+            <span class="text-xs font-mono text-gray-400">SPARK OF THE MONTH VOTES</span>
+            <span class="font-mono font-bold text-cyber-gold text-base">⭐ ${m.votes.toLocaleString()} คะแนน</span>
+          </div>
+          <div class="grid grid-cols-3 gap-2">
+            <button onclick="voteMember('${m.id}', 10, event); openMemberModal('${m.id}')" class="py-2.5 rounded-xl bg-cyber-gold/20 hover:bg-cyber-gold hover:text-black text-cyber-gold font-mono font-bold text-xs border border-cyber-gold/40 transition-all">
+              +10 ⭐
+            </button>
+            <button onclick="voteMember('${m.id}', 50, event); openMemberModal('${m.id}')" class="py-2.5 rounded-xl bg-cyber-gold/20 hover:bg-cyber-gold hover:text-black text-cyber-gold font-mono font-bold text-xs border border-cyber-gold/40 transition-all">
+              +50 ⭐
+            </button>
+            <button onclick="voteMember('${m.id}', 100, event); openMemberModal('${m.id}')" class="py-2.5 rounded-xl bg-gradient-to-r from-cyber-gold to-amber-500 text-black font-mono font-extrabold text-xs shadow-lg hover:scale-105 transition-transform">
+              +100 ⭐
+            </button>
+          </div>
+        </div>
+      `;
+      modal.classList.remove('hidden');
+      lucide.createIcons();
+    }
+
+    function closeMemberModal() {
+      document.getElementById('member-modal').classList.add('hidden');
+    }
+
+    function getCurrentTimeStr() {
+      const now = new Date();
+      return now.toLocaleTimeString('th-TH', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    // =========================================================================
+    // 6. VIEW RENDERERS
+    // =========================================================================
+    function renderCurrentView() {
+      const viewport = document.getElementById('app-viewport');
+      switch (appState.currentView) {
+        case 'welcome':
+          viewport.innerHTML = renderWelcomeView();
+          break;
+        case 'edn48':
+          viewport.innerHTML = renderGroupView('edn48');
+          break;
+        case 'tlp48':
+          viewport.innerHTML = renderGroupView('tlp48');
+          break;
+        case 'artist':
+          viewport.innerHTML = renderArtistView();
+          break;
+        case 'edenclub':
+          viewport.innerHTML = renderEdenClubView();
+          break;
+        case 'majorvote':
+          viewport.innerHTML = renderMajorVoteView();
+          break;
+        case 'account':
+          viewport.innerHTML = renderAccountView();
+          break;
+        default:
+          viewport.innerHTML = renderWelcomeView();
+      }
+      lucide.createIcons();
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 1: WELCOME LANDING PAGE (EDN48, TLP48, WAY TO SHINE ARTIST Portals)
+    // -------------------------------------------------------------------------
+    function renderWelcomeView() {
+      const kami = appState.members.find(m => m.id === appState.kamiOshiId);
+      const topSpark = [...appState.members].sort((a, b) => b.votes - a.votes)[0];
+
+      return `
+        <div class="space-y-12">
+          <!-- HERO BANNER -->
+          <section class="relative overflow-hidden rounded-[2rem] glass-panel border-2 border-white/15 p-6 sm:p-12 lg:p-16 text-center">
+            <!-- Decorative Floating Stickers -->
+            <div class="hidden sm:flex absolute top-6 left-8 px-3 py-1 rounded-full bg-cyber-pink text-white font-mono text-xs font-bold -rotate-6 shadow-lg">
+              ✦ GEN-Z IDOL VERSE
+            </div>
+            <div class="hidden sm:flex absolute top-8 right-10 px-3 py-1 rounded-full bg-cyber-cyan text-black font-mono text-xs font-bold rotate-6 shadow-lg">
+              ⚡ 2026 EDITION
+            </div>
+
+            <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/10 border border-white/15 text-xs font-mono text-cyber-lime mb-6">
+              <span class="w-2 h-2 rounded-full bg-cyber-lime animate-ping"></span>
+              WELCOME TO THE OFFICIAL FAN UNIVERSE
+            </div>
+
+            <h1 class="font-display font-extrabold text-4xl sm:text-6xl lg:text-7xl tracking-tight leading-none mb-4">
+              <span class="block text-white">WELCOME TO</span>
+              <span class="holo-text block mt-1">WAY TO SHINE</span>
+            </h1>
+
+            <p class="max-w-2xl mx-auto text-gray-300 text-sm sm:text-base lg:text-lg mb-10 leading-relaxed">
+              จักรวาลแห่งความฝันของไอดอลและศิลปินรุ่นใหม่! เลือกด้อมของคุณ ติดตามตารางงาน ฟังซิงเกิลล่าสุด โหวต <span class="text-cyber-gold font-bold">SPARK OF THE MONTH</span> ด้วย <span class="text-cyber-gold font-bold">⭐ STAR</span> และสะสม <span class="text-cyber-cyan font-bold">🪙 TOKEN</span> แลกของรางวัลสุดเอ็กซ์คลูซีฟ
+            </p>
+            <!-- 3 MAIN PORTAL BUTTONS: EDN48 (STAR) | TLP48 (TULIP) | WAY TO SHINE ARTIST -->
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto">
+              <!-- EDN48 Portal (Star Theme ⭐) -->
+              <button onclick="navigateTo('edn48')" class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyber-gold via-amber-500 to-rose-700 p-6 sm:p-7 text-left border-2 border-cyber-gold/50 neo-brutal-btn">
+                <div class="flex items-center justify-between mb-6">
+                  <span class="px-3 py-1 rounded-full bg-black/50 text-cyber-gold font-mono text-xs font-bold">⭐ STAR EMBLEM • GROUP 01</span>
+                  <span class="text-4xl group-hover:scale-125 group-hover:rotate-12 transition-transform drop-shadow-lg">⭐</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white drop-shadow mb-1">EDN48</h2>
+                <p class="text-xs sm:text-sm text-amber-50 font-medium mb-4">สัญลักษณ์ประจำวง: ดวงดาว ⭐ • 6 Members</p>
+                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold bg-black text-cyber-gold px-3.5 py-1.5 rounded-xl">
+                  ENTER EDN48 ⭐ <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </div>
+              </button>
+
+              <!-- TLP48 Portal (Tulip Theme 🌷) -->
+              <button onclick="navigateTo('tlp48')" class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyber-pink via-rose-500 to-emerald-600 p-6 sm:p-7 text-left border-2 border-cyber-pink/50 neo-brutal-btn neo-brutal-pink">
+                <div class="flex items-center justify-between mb-6">
+                  <span class="px-3 py-1 rounded-full bg-black/50 text-pink-200 font-mono text-xs font-bold">🌷 TULIP EMBLEM • GROUP 02</span>
+                  <span class="text-4xl group-hover:scale-125 group-hover:-rotate-12 transition-transform drop-shadow-lg">🌷</span>
+                </div>
+                <h2 class="font-display font-extrabold text-3xl sm:text-4xl text-white drop-shadow mb-1">TLP48</h2>
+                <p class="text-xs sm:text-sm text-pink-50 font-medium mb-4">สัญลักษณ์ประจำวง: ดอกทิวลิป 🌷 • 6 Members</p>
+                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold bg-white text-cyber-pink px-3.5 py-1.5 rounded-xl">
+                  ENTER TLP48 🌷 <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </div>
+              </button>
+
+              <!-- WAY TO SHINE ARTIST Portal -->
+              <button onclick="navigateTo('artist')" class="group relative overflow-hidden rounded-3xl bg-gradient-to-br from-cyber-cyan via-blue-600 to-zinc-900 p-6 sm:p-7 text-left border-2 border-white/20 neo-brutal-btn neo-brutal-cyan">
+                <div class="flex items-center justify-between mb-6">
+                  <span class="px-3 py-1 rounded-full bg-black/60 text-cyber-cyan font-mono text-xs font-bold">SOLO & BANDS</span>
+                  <span class="text-4xl group-hover:scale-125 transition-transform">🎧</span>
+                </div>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-1 leading-tight">WAY TO SHINE ARTIST</h2>
+                <p class="text-xs sm:text-sm text-cyan-100/90 mb-4">Independent & Solo Artists Roster</p>
+                <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold bg-black text-cyber-cyan px-3.5 py-1.5 rounded-xl">
+                  EXPLORE ARTISTS <i data-lucide="arrow-up-right" class="w-4 h-4"></i>
+                </div>
+              </button>
+            </div>
+          </section>
+
+          <!-- QUICK STATUS BAR: KAMI OSHI, SPARK LEADER & EDEN CLUB -->
+          <section class="grid grid-cols-1 md:grid-cols-3 gap-5">
+            <!-- Current Kami Oshi Card -->
+            <div onclick="navigateTo('account')" class="cursor-pointer glass-panel rounded-3xl p-5 border border-white/10 hover:border-cyber-lime transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono text-cyber-lime uppercase">👑 YOUR KAMI OSHI</span>
+                <h3 class="font-display font-bold text-xl text-white mt-0.5">
+                  ${kami ? `${kami.name} (${kami.thaiName})` : 'ยังไม่ได้เลือก Kami Oshi'}
+                </h3>
+                <p class="text-xs text-gray-400 mt-1">
+                  ${kami ? `${getGroupEmblem(kami.group)} ${kami.group} • กดเพื่อดูหน้า Account` : 'คลิกเพื่อไปเลือกเมมเบอร์อันดับ 1 ในใจคุณ'}
+                </p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${kami ? kami.color : 'from-gray-700 to-gray-800'} flex items-center justify-center text-3xl relative">
+                ${kami ? kami.emoji : '❓'}
+                ${kami ? `<span class="absolute -bottom-1.5 -right-1.5 text-base bg-black/80 rounded-full px-1">${getGroupEmblem(kami.group)}</span>` : ''}
+              </div>
+            </div>
+
+            <!-- Current Spark of the Month #1 -->
+            <div onclick="navigateTo('majorvote')" class="cursor-pointer glass-panel rounded-3xl p-5 border border-white/10 hover:border-cyber-pink transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono text-cyber-pink uppercase">🔥 SPARK #1 LEADER</span>
+                <h3 class="font-display font-bold text-xl text-white mt-0.5">${topSpark.name} (${getGroupEmblem(topSpark.group)} ${topSpark.group})</h3>
+                <p class="text-xs text-cyber-gold font-mono font-bold mt-1">⭐ ${topSpark.votes.toLocaleString()} STAR VOTES</p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-gradient-to-br ${topSpark.color} flex items-center justify-center text-3xl">
+                ${topSpark.emoji}
+              </div>
+            </div>
+
+            <!-- Eden Club Redeem Promo -->
+            <div onclick="navigateTo('edenclub')" class="cursor-pointer glass-panel rounded-3xl p-5 border border-white/10 hover:border-cyber-cyan transition-all flex items-center justify-between">
+              <div>
+                <span class="text-[11px] font-mono text-cyber-cyan uppercase">🎟️ EDEN CLUB & REDEEM</span>
+                <h3 class="font-display font-bold text-xl text-white mt-0.5">กรอกโค้ดรับ STAR ฟรี!</h3>
+                <p class="text-xs text-gray-400 mt-1">ใช้โค้ด <span class="text-cyber-lime font-mono font-bold">SHINE2026</span> ได้ทันที</p>
+              </div>
+              <div class="w-14 h-14 rounded-2xl bg-cyber-cyan/20 border border-cyber-cyan/40 flex items-center justify-center text-2xl">
+                🎁
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 2 & 3: EDN48 & TLP48 SHARED TEMPLATE
+    // (Banners, Schedule, Spark of the Month, 1st Single + MUSIC AUDIO, Members + IG/Age/RealName, Social Footer)
+    // -------------------------------------------------------------------------
+    function renderGroupView(groupKey) {
+      const group = GROUPS_DATA[groupKey];
+      const groupMembers = appState.members.filter(m => m.group === group.name);
+      const sparkRanking = [...groupMembers].sort((a, b) => b.votes - a.votes);
+      const maxVotes = sparkRanking[0]?.votes || 1;
+
+      return `
+        <div class="space-y-10">
+          <!-- GROUP HEADER & SWITCHER -->
+          <div class="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-6">
+            <div class="flex items-center gap-4">
+              <div class="w-16 h-16 sm:w-20 sm:h-20 rounded-3xl bg-gradient-to-br ${group.gradient} flex items-center justify-center text-4xl sm:text-5xl shadow-xl border-2 border-white/25 shrink-0 animate-float">
+                ${group.symbol}
+              </div>
+              <div>
+                <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full ${group.badgeBg} text-xs font-mono font-extrabold mb-1.5">
+                  ${group.symbol} ${group.symbolLabel} • OFFICIAL PORTAL
+                </div>
+                <h1 class="font-display font-extrabold text-4xl sm:text-5xl text-white tracking-tight">${group.name}</h1>
+                <p class="text-sm sm:text-base text-gray-300 mt-1">${group.tagline}</p>
+              </div>
+            </div>
+            
+            <!-- Quick Switch between EDN48 (Star) & TLP48 (Tulip) -->
+            <div class="flex items-center gap-2 bg-black/50 p-1.5 rounded-2xl border border-white/10">
+              <button onclick="navigateTo('edn48')" class="px-4 py-2 rounded-xl text-xs font-display font-bold transition-all ${groupKey === 'edn48' ? 'bg-cyber-gold text-black shadow-md' : 'text-gray-400 hover:text-white'}">
+                ⭐ EDN48
+              </button>
+              <button onclick="navigateTo('tlp48')" class="px-4 py-2 rounded-xl text-xs font-display font-bold transition-all ${groupKey === 'tlp48' ? 'bg-gradient-to-r from-cyber-pink to-emerald-400 text-white shadow-md' : 'text-gray-400 hover:text-white'}">
+                🌷 TLP48
+              </button>
+            </div>
+          </div>
+
+          <!-- 1. EVENT BANNERS CAROUSEL / GRID -->
+          <section>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="font-display font-extrabold text-xl sm:text-2xl flex items-center gap-2">
+                <span>${group.symbol}</span> EVENT BANNERS & HIGHLIGHTS
+              </h2>
+              <span class="text-xs font-mono text-gray-400">2026-2027 SEASON</span>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+              ${group.banners.map(b => `
+                <div class="relative overflow-hidden rounded-3xl bg-gradient-to-br ${b.bg} border border-white/15 p-6 sm:p-8 flex flex-col justify-between min-h-[210px] group">
+                  <div>
+                    <span class="inline-block px-3 py-1 rounded-full bg-white/15 backdrop-blur-md text-[11px] font-mono font-bold text-cyber-lime mb-3">
+                      ${b.tag}
+                    </span>
+                    <h3 class="font-display font-extrabold text-xl sm:text-2xl text-white mb-2 group-hover:text-cyber-lime transition-colors">
+                      ${b.title}
+                    </h3>
+                    <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">${b.desc}</p>
+                  </div>
+                  <div class="mt-5 pt-3 border-t border-white/15 flex items-center justify-between text-xs font-mono text-gray-200">
+                    <span>📅 ${b.date}</span>
+                    <span class="text-cyber-lime font-bold">TICKETS & INFO →</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+
+          <!-- 2. SCHEDULE & SPARK OF THE MONTH (2-Column Layout) -->
+          <section class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <!-- LEFT: GROUP SCHEDULE -->
+            <div class="lg:col-span-5 glass-panel rounded-3xl p-6 border border-white/10">
+              <div class="flex items-center justify-between mb-5">
+                <h2 class="font-display font-extrabold text-xl flex items-center gap-2">
+                  <i data-lucide="calendar" class="w-5 h-5 ${group.accentClass}"></i>
+                  ตารางงาน ${group.name}
+                </h2>
+                <span class="text-[11px] font-mono px-2.5 py-0.5 rounded-full bg-white/10 text-gray-300">SCHEDULE</span>
+              </div>
+
+              <div class="space-y-3">
+                ${group.schedule.map(item => `
+                  <div class="p-3.5 rounded-2xl bg-white/5 hover:bg-white/10 border border-white/10 transition-all flex items-start gap-3.5">
+                    <div class="px-2.5 py-2 rounded-xl bg-black/60 border border-white/10 text-center shrink-0 min-w-[64px]">
+                      <div class="font-mono font-extrabold text-xs text-cyber-lime">${item.date}</div>
+                      <div class="font-mono text-[10px] text-gray-400">${item.time}</div>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                      <span class="inline-block text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-white/10 text-cyber-cyan mb-1">
+                        ${item.type}
+                      </span>
+                      <h4 class="font-bold text-sm text-white leading-snug">${item.title}</h4>
+                      <p class="text-xs text-gray-400 mt-1 flex items-center gap-1">
+                        <i data-lucide="map-pin" class="w-3 h-3"></i> ${item.location}
+                      </p>
+                    </div>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- RIGHT: SPARK OF THE MONTH (STAR VOTING SYSTEM) -->
+            <div class="lg:col-span-7 glass-panel rounded-3xl p-6 border-2 border-cyber-gold/30">
+              <div class="flex flex-wrap items-center justify-between gap-2 mb-5">
+                <div>
+                  <span class="text-[11px] font-mono font-bold text-cyber-gold">⭐ MONTHLY POPULARITY RANKING</span>
+                  <h2 class="font-display font-extrabold text-xl sm:text-2xl text-white">SPARK OF THE MONTH (${group.name})</h2>
+                </div>
+                <div class="text-right">
+                  <span class="text-xs text-gray-400 block">ใช้ค่าเงิน STAR โหวต</span>
+                  <span class="font-mono font-bold text-xs text-cyber-gold">คงเหลือ: ⭐ ${appState.stars.toLocaleString()}</span>
+                </div>
+              </div>
+
+              <div class="space-y-3">
+                ${sparkRanking.map((m, idx) => {
+                  const pct = Math.max(12, Math.round((m.votes / maxVotes) * 100));
+                  const rankBadge = idx === 0 ? '🥇 #1' : idx === 1 ? '🥈 #2' : idx === 2 ? '🥉 #3' : `#${idx + 1}`;
+                  return `
+                    <div class="p-3 rounded-2xl bg-black/40 border border-white/10 hover:border-cyber-gold/50 transition-all">
+                      <div class="flex items-center justify-between gap-3 mb-2">
+                        <div class="flex items-center gap-3 min-w-0">
+                          <span class="font-mono font-extrabold text-xs px-2 py-1 rounded-lg ${idx === 0 ? 'bg-cyber-gold text-black' : 'bg-white/10 text-gray-300'}">
+                            ${rankBadge}
+                          </span>
+                          <div class="w-9 h-9 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center text-lg shrink-0">
+                            ${m.emoji}
+                          </div>
+                          <div class="min-w-0">
+                            <div class="font-bold text-sm text-white truncate">
+                              ${m.name} <span class="text-xs font-normal text-gray-400">(${m.thaiName})</span>
+                              ${appState.kamiOshiId === m.id ? '<span class="ml-1 text-xs" title="Kami Oshi">👑</span>' : ''}
+                            </div>
+                            <div class="text-[11px] font-mono text-cyber-gold font-bold">⭐ ${m.votes.toLocaleString()} STARS</div>
+                          </div>
+                        </div>
+
+                        <div class="flex items-center gap-1.5 shrink-0">
+                          <button onclick="voteMember('${m.id}', 10, event)" class="px-3 py-1.5 rounded-xl bg-cyber-gold/20 hover:bg-cyber-gold hover:text-black text-cyber-gold font-mono font-bold text-xs border border-cyber-gold/40 transition-all">
+                            +10 ⭐
+                          </button>
+                          <button onclick="voteMember('${m.id}', 50, event)" class="px-3 py-1.5 rounded-xl bg-cyber-gold text-black font-mono font-extrabold text-xs hover:scale-105 transition-transform">
+                            +50 ⭐
+                          </button>
+                        </div>
+                      </div>
+                      <!-- Progress bar -->
+                      <div class="w-full h-1.5 bg-white/10 rounded-full overflow-hidden">
+                        <div class="h-full bg-gradient-to-r from-cyber-gold to-cyber-lime rounded-full transition-all duration-500" style="width: ${pct}%"></div>
+                      </div>
+                    </div>
+                  `;
+                }).join('')}
+              </div>
+            </div>
+          </section>
+
+          <!-- 3. LATEST RELEASE: 1ST SINGLE & MUSIC AUDIO MENU -->
+          <section class="glass-panel rounded-3xl p-6 sm:p-8 border ${group.borderAccent}">
+            <div class="flex flex-wrap items-center justify-between gap-2 mb-6">
+              <div>
+                <span class="text-xs font-mono font-bold ${group.accentClass}">${group.symbol} LATEST DISCOGRAPHY & MUSIC AUDIO</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-0.5">ผลงานล่าสุด: ${group.single.title}</h2>
+              </div>
+              <span class="px-3 py-1 rounded-full bg-white/10 font-mono text-xs text-gray-300">${group.single.releaseDate}</span>
+            </div>
+
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 items-center">
+              <!-- Album Cover Artwork -->
+              <div class="lg:col-span-4">
+                <div class="aspect-square max-w-[280px] mx-auto rounded-3xl bg-gradient-to-br ${group.single.coverGradient} p-6 flex flex-col justify-between shadow-2xl border-2 border-white/25 relative overflow-hidden group">
+                  <div class="flex justify-between items-start z-10">
+                    <span class="px-2.5 py-1 rounded-lg bg-black/60 text-white font-mono text-[10px] font-bold">1ST SINGLE</span>
+                    <span class="text-3xl drop-shadow">${group.symbol}</span>
+                  </div>
+                  <div class="z-10">
+                    <div class="font-display font-extrabold text-2xl text-white drop-shadow">${group.name}</div>
+                    <div class="text-xs font-mono text-white/95 mt-1">Center: ${group.single.center}</div>
+                  </div>
+                  <div class="absolute -bottom-10 -right-10 w-40 h-40 rounded-full border-[16px] border-white/15 group-hover:scale-110 transition-transform"></div>
+                </div>
+              </div>
+
+              <!-- Tracklist & Interactive MUSIC AUDIO Menu -->
+              <div class="lg:col-span-8 space-y-4">
+                <p class="text-sm text-gray-300 leading-relaxed">${group.single.description}</p>
+                
+                <div class="bg-black/50 rounded-2xl p-4 border border-white/10">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="font-mono font-bold text-xs text-cyber-cyan flex items-center gap-1.5">
+                      <i data-lucide="headphones" class="w-4 h-4"></i> MENU: MUSIC AUDIO (คลิกเพื่อฟังตัวอย่างเพลง)
+                    </span>
+                    <span class="text-[11px] font-mono text-gray-400">SYNTH PREVIEW</span>
+                  </div>
+
+                  <div class="space-y-2">
+                    ${group.single.tracks.map(track => {
+                      const isThisPlaying = currentTrack && currentTrack.id === track.id && isPlayingAudio;
+                      return `
+                        <div class="flex items-center justify-between gap-3 p-3 rounded-xl ${isThisPlaying ? 'bg-cyber-lime/20 border border-cyber-lime' : 'bg-white/5 hover:bg-white/10 border border-transparent'} transition-all">
+                          <div class="flex items-center gap-3 min-w-0">
+                            <button onclick="playTrackPreview('${group.name}', '${track.id}')" class="w-9 h-9 rounded-xl ${isThisPlaying ? 'bg-cyber-lime text-black' : 'bg-white/15 text-white hover:bg-cyber-lime hover:text-black'} flex items-center justify-center shrink-0 transition-colors">
+                              <i data-lucide="${isThisPlaying ? 'volume-2' : 'play'}" class="w-4 h-4"></i>
+                            </button>
+                            <div class="min-w-0">
+                              <div class="font-bold text-sm text-white truncate">${track.title}</div>
+                              <div class="text-[11px] font-mono text-gray-400">${group.name} • ${track.tempo} BPM</div>
+                            </div>
+                          </div>
+                          <span class="font-mono text-xs text-gray-400 shrink-0">${track.duration}</span>
+                        </div>
+                      `;
+                    }).join('')}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- 4. MEMBER DIRECTORY (ชื่อจริง, อายุ, ไอจีเมมเบอร์, ปุ่ม Oshi & Kami Oshi) -->
+          <section>
+            <div class="flex flex-wrap items-center justify-between gap-3 mb-6">
+              <div>
+                <span class="text-xs font-mono font-bold ${group.accentClass}">${group.symbol} OFFICIAL ROSTER & PROFILES</span>
+                <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white">เมมเบอร์ ${group.name} (${groupMembers.length} คน)</h2>
+              </div>
+              <p class="text-xs text-gray-400">กด <span class="text-cyber-pink font-bold">💖 Oshi</span> ได้หลายคน • กด <span class="text-cyber-lime font-bold">👑 Kami Oshi</span> ได้ 1 คนเท่านั้น</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              ${groupMembers.map(m => renderMemberCard(m)).join('')}
+            </div>
+          </section>
+
+          <!-- 5. OFFICIAL SOCIAL MEDIA INFORMATION FOOTER -->
+          <footer class="glass-panel rounded-3xl p-6 sm:p-8 border border-white/15 text-center">
+            <span class="text-xs font-mono ${group.accentClass} uppercase tracking-widest">${group.symbol} OFFICIAL CHANNELS</span>
+            <h3 class="font-display font-extrabold text-xl sm:text-2xl text-white mt-1 mb-2">INFORMATION & SOCIAL MEDIA (${group.name})</h3>
+            <p class="text-xs sm:text-sm text-gray-400 max-w-xl mx-auto mb-6">
+              ติดตามข่าวสาร ประกาศสำคัญ เบื้องหลังการซ้อม และไลฟ์สดของ ${group.fullName} ได้ทุกช่องทางโซเชียลมีเดียอย่างเป็นทางการ
+            </p>
+            <div class="flex flex-wrap items-center justify-center gap-3">
+              <a href="${group.socials.instagram}" target="_blank" class="px-4 py-2.5 rounded-2xl bg-gradient-to-r from-purple-600 to-pink-600 text-white font-bold text-xs flex items-center gap-2 hover:scale-105 transition-transform">
+                <i data-lucide="instagram" class="w-4 h-4"></i> Instagram
+              </a>
+              <a href="${group.socials.tiktok}" target="_blank" class="px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs flex items-center gap-2 hover:scale-105 transition-transform">
+                <i data-lucide="music-2" class="w-4 h-4 text-cyber-cyan"></i> TikTok
+              </a>
+              <a href="${group.socials.twitter}" target="_blank" class="px-4 py-2.5 rounded-2xl bg-white/10 hover:bg-white/20 border border-white/15 text-white font-bold text-xs flex items-center gap-2 hover:scale-105 transition-transform">
+                <i data-lucide="twitter" class="w-4 h-4 text-sky-400"></i> X (Twitter)
+              </a>
+              <a href="${group.socials.youtube}" target="_blank" class="px-4 py-2.5 rounded-2xl bg-red-600/80 hover:bg-red-600 text-white font-bold text-xs flex items-center gap-2 hover:scale-105 transition-transform">
+                <i data-lucide="youtube" class="w-4 h-4"></i> YouTube
+              </a>
+              <a href="${group.socials.facebook}" target="_blank" class="px-4 py-2.5 rounded-2xl bg-blue-600/80 hover:bg-blue-600 text-white font-bold text-xs flex items-center gap-2 hover:scale-105 transition-transform">
+                <i data-lucide="facebook" class="w-4 h-4"></i> Facebook
+              </a>
+            </div>
+          </footer>
+        </div>
+      `;
+    }
+
+    // Reusable Member Card Component
+    function renderMemberCard(m) {
+      const isOshi = appState.oshiIds.includes(m.id);
+      const isKami = appState.kamiOshiId === m.id;
+      const emblem = getGroupEmblem(m.group);
+
+      return `
+        <div onclick="openMemberModal('${m.id}')" class="cursor-pointer group glass-panel rounded-3xl p-5 border-2 ${isKami ? 'border-cyber-lime shadow-lg shadow-cyber-lime/15' : isOshi ? 'border-cyber-pink/60' : 'border-white/10 hover:border-white/30'} transition-all flex flex-col justify-between">
+          <div>
+            <!-- Top Row: Avatar & Status Badges -->
+            <div class="flex items-start justify-between gap-3 mb-4">
+              <div class="relative w-16 h-16 rounded-2xl bg-gradient-to-br ${m.color} flex items-center justify-center text-3xl shadow-md group-hover:scale-105 transition-transform">
+                ${m.emoji}
+                <span class="absolute -bottom-1.5 -right-1.5 w-6 h-6 rounded-full bg-cyber-bg border border-white/20 flex items-center justify-center text-xs shadow" title="${m.group}">
+                  ${emblem}
+                </span>
+              </div>
+              <div class="flex flex-col items-end gap-1">
+                ${isKami ? '<span class="px-2.5 py-0.5 rounded-full bg-cyber-lime text-black font-mono font-extrabold text-[10px]">👑 KAMI OSHI</span>' : ''}
+                ${isOshi && !isKami ? '<span class="px-2.5 py-0.5 rounded-full bg-cyber-pink text-white font-mono font-bold text-[10px]">💖 MY OSHI</span>' : ''}
+                <span class="px-2 py-0.5 rounded-full bg-white/10 text-gray-300 font-mono text-[10px]">${emblem} ${m.group} • ${m.role}</span>
+              </div>
+            </div>
+
+            <!-- Name, Real Name, Age & IG -->
+            <h3 class="font-display font-extrabold text-xl text-white group-hover:text-cyber-lime transition-colors">
+              ${m.name} <span class="font-sans font-semibold text-sm text-gray-300">(${m.thaiName})</span>
+            </h3>
+            
+            <div class="mt-2.5 space-y-1 text-xs text-gray-300 bg-black/35 p-3 rounded-2xl border border-white/5">
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">ชื่อจริง:</span>
+                <span class="font-medium text-right truncate max-w-[180px]" title="${m.realName}">${m.realName.split('(')[0]}</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">อายุ:</span>
+                <span class="font-mono font-bold text-cyber-cyan">${m.age} ปี</span>
+              </div>
+              <div class="flex items-center justify-between">
+                <span class="text-gray-400">Instagram:</span>
+                <a href="https://instagram.com/${m.ig.replace('@','')}" target="_blank" onclick="event.stopPropagation()" class="font-mono font-bold text-cyber-pink hover:underline">
+                  ${m.ig}
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Action Buttons: Oshi, Kami Oshi & Quick Vote -->
+          <div class="mt-4 pt-3 border-t border-white/10 flex items-center gap-2">
+            <button onclick="toggleOshi('${m.id}', event)" class="flex-1 py-2 px-2 rounded-xl text-xs font-bold transition-all ${isOshi ? 'bg-cyber-pink text-white' : 'bg-white/10 hover:bg-white/20 text-gray-200'}">
+              ${isOshi ? '💖 Oshi' : '🤍 Oshi'}
+            </button>
+            <button onclick="setKamiOshi('${m.id}', event)" class="flex-1 py-2 px-2 rounded-xl text-xs font-bold transition-all ${isKami ? 'bg-cyber-lime text-black' : 'bg-white/10 hover:bg-white/20 text-gray-200'}">
+              ${isKami ? '👑 Kami' : '👑 ตั้ง Kami'}
+            </button>
+            <button onclick="voteMember('${m.id}', 10, event)" title="โหวต 10 STAR" class="py-2 px-2.5 rounded-xl bg-cyber-gold/20 hover:bg-cyber-gold hover:text-black text-cyber-gold font-mono font-bold text-xs border border-cyber-gold/30 transition-all">
+              +10⭐
+            </button>
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 4: WAY TO SHINE ARTIST VIEW
+    // -------------------------------------------------------------------------
+    function renderArtistView() {
+      const artists = appState.members.filter(m => m.group === 'WTS ARTIST');
+
+      return `
+        <div class="space-y-10">
+          <div class="rounded-3xl bg-gradient-to-r from-cyber-lime/20 via-cyber-cyan/15 to-cyber-pink/20 border border-white/15 p-6 sm:p-10">
+            <span class="px-3 py-1 rounded-full bg-cyber-lime text-black font-mono text-xs font-extrabold">✦ SOLO & INDEPENDENT ROSTER</span>
+            <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-3">WAY TO SHINE ARTIST</h1>
+            <p class="text-sm sm:text-base text-gray-300 mt-2 max-w-2xl">
+              พื้นที่ของศิลปินเดี่ยวและโปรดิวเซอร์รุ่นใหม่ภายใต้สังกัด Way To Shine Entertainment สามารถกดติดตามเป็น Oshi, ตั้งเป็น Kami Oshi และโหวต STAR สนับสนุนผลงานได้เช่นกัน!
+            </p>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            ${artists.map(a => renderMemberCard(a)).join('')}
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 5: EDEN CLUB (REDEEM CODE & TOKEN SHOP)
+    // -------------------------------------------------------------------------
+    function renderEdenClubView() {
+      return `
+        <div class="space-y-10">
+          <!-- Header -->
+          <div class="flex flex-wrap items-center justify-between gap-4">
+            <div>
+              <span class="px-3 py-1 rounded-full bg-cyber-cyan text-black font-mono text-xs font-extrabold">🎟️ OFFICIAL FANCLUB & REWARDS</span>
+              <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-2">EDEN CLUB</h1>
+              <p class="text-sm text-gray-300 mt-1">กรอกรหัส <span class="text-cyber-lime font-bold">REDEEM CODE</span> เพื่อรับ STAR & TOKEN ฟรี และใช้ TOKEN แลกไอเทมสุดเอ็กซ์คลูซีฟ</p>
+            </div>
+            <div class="glass-panel px-5 py-3 rounded-2xl border border-cyber-cyan/40 flex items-center gap-4">
+              <div>
+                <div class="text-[10px] font-mono text-cyber-cyan">YOUR TOKEN WALLET</div>
+                <div class="font-mono font-extrabold text-2xl text-white">🪙 ${appState.tokens.toLocaleString()}</div>
+              </div>
+              <div class="h-8 w-px bg-white/15"></div>
+              <div>
+                <div class="text-[10px] font-mono text-cyber-gold">YOUR STAR WALLET</div>
+                <div class="font-mono font-extrabold text-2xl text-white">⭐ ${appState.stars.toLocaleString()}</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- REDEEM CODE SECTION -->
+          <section class="glass-panel rounded-3xl p-6 sm:p-8 border-2 border-cyber-lime/50 relative overflow-hidden">
+            <div class="max-w-2xl">
+              <div class="inline-flex items-center gap-1.5 text-xs font-mono font-bold text-cyber-lime mb-2">
+                <i data-lucide="key-round" class="w-4 h-4"></i> REDEEM CODE CENTER
+              </div>
+              <h2 class="font-display font-extrabold text-2xl sm:text-3xl text-white mb-2">กรอกโค้ดรับ STAR & TOKEN ฟรี!</h2>
+              <p class="text-xs sm:text-sm text-gray-300 mb-5">
+                นำโค้ดจากอัลบั้ม CD, บัตรจับมือ หรือกิจกรรมไลฟ์สดมากรอกที่นี่ (โค้ดทดลองใช้ได้จริง: 
+                <button type="button" onclick="document.getElementById('redeem-input').value='SHINE2026'" class="font-mono font-bold text-cyber-lime underline">SHINE2026</button>, 
+                <button type="button" onclick="document.getElementById('redeem-input').value='EDN48STAR'" class="font-mono font-bold text-cyber-gold underline">EDN48STAR ⭐</button>, 
+                <button type="button" onclick="document.getElementById('redeem-input').value='TLP48TULIP'" class="font-mono font-bold text-cyber-pink underline">TLP48TULIP 🌷</button>, 
+                <button type="button" onclick="document.getElementById('redeem-input').value='GENZTOKEN'" class="font-mono font-bold text-cyber-cyan underline">GENZTOKEN</button>)
+              </p>
+
+              <form onsubmit="handleRedeemCode(event)" class="flex flex-col sm:flex-row gap-3">
+                <input id="redeem-input" type="text" placeholder="พิมพ์โค้ดของคุณ เช่น SHINE2026..." class="flex-1 bg-black/60 border-2 border-white/20 focus:border-cyber-lime rounded-2xl px-4 py-3.5 font-mono uppercase text-white placeholder-gray-500 outline-none" />
+                <button type="submit" class="px-6 py-3.5 rounded-2xl bg-cyber-lime text-black font-display font-extrabold text-sm neo-brutal-btn shrink-0">
+                  REDEEM CODE ⚡
+                </button>
+              </form>
+
+              ${appState.redeemedCodes.length > 0 ? `
+                <div class="mt-4 flex flex-wrap items-center gap-2 text-xs text-gray-400">
+                  <span>โค้ดที่ใช้แล้ว:</span>
+                  ${appState.redeemedCodes.map(c => `<span class="px-2 py-0.5 rounded bg-white/10 font-mono text-gray-300 line-through">${c}</span>`).join('')}
+                </div>
+              ` : ''}
+            </div>
+          </section>
+
+          <!-- EDEN CLUB TOKEN STORE -->
+          <section>
+            <div class="flex items-center justify-between mb-5">
+              <h2 class="font-display font-extrabold text-2xl text-white flex items-center gap-2">
+                <i data-lucide="shopping-bag" class="w-6 h-6 text-cyber-cyan"></i> EDEN CLUB STORE (ใช้ 🪙 TOKEN ซื้อของ)
+              </h2>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              ${SHOP_ITEMS.map(item => `
+                <div class="glass-panel rounded-3xl p-5 border border-white/10 hover:border-cyber-cyan transition-all flex flex-col justify-between">
+                  <div>
+                    <div class="flex items-center justify-between mb-4">
+                      <span class="px-2.5 py-0.5 rounded-full bg-cyber-cyan/20 text-cyber-cyan font-mono font-bold text-[10px]">${item.category}</span>
+                      <span class="px-2 py-0.5 rounded-full bg-cyber-pink text-white font-mono font-bold text-[10px]">${item.badge}</span>
+                    </div>
+                    <div class="w-16 h-16 rounded-2xl bg-white/5 flex items-center justify-center text-4xl mb-4">
+                      ${item.emoji}
+                    </div>
+                    <h3 class="font-bold text-base text-white leading-snug mb-2">${item.name}</h3>
+                    <p class="text-xs text-gray-400 leading-relaxed mb-4">${item.desc}</p>
+                  </div>
+
+                  <div class="pt-3 border-t border-white/10 flex items-center justify-between gap-2">
+                    <span class="font-mono font-extrabold text-base text-cyber-cyan">🪙 ${item.price}</span>
+                    <button onclick="buyShopItem('${item.id}')" class="px-4 py-2 rounded-xl bg-cyber-cyan text-black font-bold text-xs hover:scale-105 transition-transform">
+                      แลกซื้อเลย
+                    </button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 6: MAJOR VOTE ARENA (ALL GROUPS COMBINED LEADERBOARD)
+    // -------------------------------------------------------------------------
+    function renderMajorVoteView() {
+      const allRanked = [...appState.members].sort((a, b) => b.votes - a.votes);
+      const top3 = allRanked.slice(0, 3);
+
+      return `
+        <div class="space-y-10">
+          <div class="text-center max-w-3xl mx-auto">
+            <span class="px-3.5 py-1 rounded-full bg-cyber-pink text-white font-mono text-xs font-extrabold">🏆 WAY TO SHINE GRAND ELECTION</span>
+            <h1 class="font-display font-extrabold text-3xl sm:text-5xl text-white mt-3">MAJOR VOTE 2026</h1>
+            <p class="text-sm sm:text-base text-gray-300 mt-2">
+              ศึกชิงตำแหน่งเซ็นเตอร์ใหญ่แห่งจักรวาล Way To Shine รวมทุกเมมเบอร์จาก <span class="text-cyber-gold font-bold">⭐ EDN48</span>, <span class="text-cyber-pink font-bold">🌷 TLP48</span> และ <span class="text-cyber-lime font-bold">🎧 WTS ARTIST</span> ใช้ <span class="text-cyber-gold font-bold">⭐ STAR</span> ของคุณผลักดันคามิโอชิสู่จุดสูงสุด!
+            </p>
+          </div>
+
+          <!-- TOP 3 PODIUM -->
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-4xl mx-auto">
+            ${top3.map((m, i) => `
+              <div class="glass-panel rounded-3xl p-6 border-2 ${i === 0 ? 'border-cyber-gold bg-cyber-gold/5 md:-translate-y-3' : 'border-white/15'} text-center relative">
+                <div class="inline-block px-3 py-1 rounded-full ${i === 0 ? 'bg-cyber-gold text-black' : 'bg-white/15 text-white'} font-mono font-extrabold text-xs mb-4">
+                  ${i === 0 ? '👑 RANK #1 QUEEN' : i === 1 ? '🥈 RANK #2' : '🥉 RANK #3'}
+                </div>
+                <div class="w-20 h-20 mx-auto rounded-3xl bg-gradient-to-br ${m.color} flex items-center justify-center text-4xl shadow-lg mb-3">
+                  ${m.emoji}
+                </div>
+                <span class="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-white/10 text-gray-200">${getGroupEmblem(m.group)} ${m.group}</span>
+                <h3 class="font-display font-extrabold text-2xl text-white mt-1">${m.name}</h3>
+                <p class="text-xs text-gray-400">${m.thaiName}</p>
+                <div class="font-mono font-extrabold text-lg text-cyber-gold my-3">⭐ ${m.votes.toLocaleString()}</div>
+                <button onclick="voteMember('${m.id}', 50, event)" class="w-full py-2.5 rounded-xl bg-cyber-gold text-black font-mono font-extrabold text-xs hover:scale-105 transition-transform">
+                  VOTE +50 ⭐
+                </button>
+              </div>
+            `).join('')}
+          </div>
+
+          <!-- FULL RANKING TABLE -->
+          <div class="glass-panel rounded-3xl p-5 sm:p-6 border border-white/10">
+            <h3 class="font-display font-bold text-lg text-white mb-4">ตารางอันดับรวมทั้งหมด (${allRanked.length} คน)</h3>
+            <div class="space-y-2.5">
+              ${allRanked.map((m, idx) => `
+                <div class="flex flex-wrap items-center justify-between gap-3 p-3 rounded-2xl bg-black/40 border border-white/5 hover:border-white/20 transition-all">
+                  <div class="flex items-center gap-3">
+                    <span class="w-8 text-center font-mono font-extrabold text-sm ${idx < 3 ? 'text-cyber-gold' : 'text-gray-400'}">#${idx + 1}</span>
+                    <div class="w-10 h-10 rounded-xl bg-gradient-to-br ${m.color} flex items-center justify-center text-xl">${m.emoji}</div>
+                    <div>
+                      <div class="font-bold text-sm text-white flex items-center gap-2">
+                        ${m.name} (${m.thaiName})
+                        <span class="text-[10px] font-mono px-2 py-0.5 rounded bg-white/10 text-gray-200">${getGroupEmblem(m.group)} ${m.group}</span>
+                      </div>
+                      <div class="text-xs font-mono text-cyber-gold">⭐ ${m.votes.toLocaleString()} STARS</div>
+                    </div>
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <button onclick="voteMember('${m.id}', 10, event)" class="px-3 py-1.5 rounded-xl bg-white/10 hover:bg-cyber-gold hover:text-black text-xs font-mono font-bold transition-all">+10 ⭐</button>
+                    <button onclick="voteMember('${m.id}', 100, event)" class="px-3 py-1.5 rounded-xl bg-cyber-pink text-white text-xs font-mono font-bold hover:scale-105 transition-transform">+100 ⭐</button>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // -------------------------------------------------------------------------
+    // VIEW 7: MY ACCOUNT PAGE (Oshi count & list, Kami Oshi, STAR & TOKEN balances)
+    // -------------------------------------------------------------------------
+    function renderAccountView() {
+      const kami = appState.members.find(m => m.id === appState.kamiOshiId);
+      const oshiList = appState.members.filter(m => appState.oshiIds.includes(m.id));
+
+      return `
+        <div class="space-y-8">
+          <!-- PROFILE HEADER & WALLETS -->
+          <section class="glass-panel rounded-3xl p-6 sm:p-8 border-2 border-white/15">
+            <div class="flex flex-col lg:flex-row lg:items-center justify-between gap-6">
+              <div class="flex items-center gap-4">
+                <div class="w-20 h-20 rounded-3xl holo-gradient p-1 shrink-0">
+                  <div class="w-full h-full bg-cyber-bg rounded-[20px] flex items-center justify-center text-4xl">
+                    ${kami ? kami.emoji : '👾'}
+                  </div>
+                </div>
+                <div>
+                  <div class="flex flex-wrap items-center gap-2">
+                    <span class="px-2.5 py-0.5 rounded-full bg-cyber-lime/20 text-cyber-lime font-mono text-[11px] font-bold">GEN-Z FAN PASSPORT</span>
+                    <button onclick="openResetModal()" class="px-2.5 py-0.5 rounded-full bg-red-500/20 hover:bg-red-500 text-red-300 hover:text-white border border-red-500/40 font-mono text-[11px] font-bold transition-all flex items-center gap-1">
+                      <i data-lucide="rotate-ccw" class="w-3 h-3"></i> รีเซ็ตข้อมูล (RESET)
+                    </button>
+                  </div>
+                  <h1 class="font-display font-extrabold text-2xl sm:text-3xl text-white mt-1.5">MY ACCOUNT</h1>
+                  <p class="text-xs text-gray-400">สมาชิก Way To Shine Universe • Oshi ทั้งหมด <span class="text-cyber-pink font-bold">${oshiList.length} คน</span></p>
+                </div>
+              </div>
+
+              <!-- STAR & TOKEN BALANCES -->
+              <div class="grid grid-cols-2 gap-3 sm:gap-4">
+                <div class="bg-cyber-gold/15 border border-cyber-gold/40 rounded-2xl p-4">
+                  <div class="text-[11px] font-mono text-cyber-gold">⭐ STAR (สำหรับโหวต)</div>
+                  <div class="font-mono font-extrabold text-2xl sm:text-3xl text-white mt-1">${appState.stars.toLocaleString()}</div>
+                  <button onclick="openTopUpModal()" class="mt-2 text-[11px] font-mono font-bold text-cyber-gold underline">+ รับ STAR เพิ่ม</button>
+                </div>
+                <div class="bg-cyber-cyan/15 border border-cyber-cyan/40 rounded-2xl p-4">
+                  <div class="text-[11px] font-mono text-cyber-cyan">🪙 TOKEN (สำหรับซื้อของ)</div>
+                  <div class="font-mono font-extrabold text-2xl sm:text-3xl text-white mt-1">${appState.tokens.toLocaleString()}</div>
+                  <button onclick="navigateTo('edenclub')" class="mt-2 text-[11px] font-mono font-bold text-cyber-cyan underline">ไปร้านค้า EDEN CLUB →</button>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- KAMI OSHI SPOTLIGHT -->
+          <section class="glass-panel rounded-3xl p-6 sm:p-8 border-2 border-cyber-lime/60 relative overflow-hidden">
+            <div class="flex items-center justify-between mb-4">
+              <span class="px-3 py-1 rounded-full bg-cyber-lime text-black font-mono font-extrabold text-xs">👑 MY KAMI OSHI (อันดับ 1 ในใจ)</span>
+              <span class="text-xs text-gray-400">เลือกได้ 1 คนเท่านั้น</span>
+            </div>
+
+            ${kami ? `
+              <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+                <div class="flex items-center gap-5">
+                  <div class="relative w-24 h-24 rounded-3xl bg-gradient-to-br ${kami.color} flex items-center justify-center text-5xl shadow-xl border-2 border-cyber-lime">
+                    ${kami.emoji}
+                    <span class="absolute -bottom-2 -right-2 w-8 h-8 rounded-full bg-cyber-bg border-2 border-cyber-lime flex items-center justify-center text-base shadow-lg">
+                      ${getGroupEmblem(kami.group)}
+                    </span>
+                  </div>
+                  <div>
+                    <span class="text-xs font-mono px-2.5 py-0.5 rounded bg-white/10 text-cyber-lime">${getGroupEmblem(kami.group)} ${kami.group}</span>
+                    <h2 class="font-display font-extrabold text-3xl text-white mt-1">${kami.name} <span class="text-lg font-sans text-gray-300">(${kami.thaiName})</span></h2>
+                    <p class="text-xs text-gray-400 mt-1">${kami.realName} • อายุ ${kami.age} ปี</p>
+                    <p class="text-xs font-mono text-cyber-pink mt-0.5">${kami.ig}</p>
+                  </div>
+                </div>
+                <div class="flex flex-col sm:items-end gap-2 w-full sm:w-auto">
+                  <div class="font-mono font-bold text-sm text-cyber-gold">คะแนนโหวตปัจจุบัน: ⭐ ${kami.votes.toLocaleString()}</div>
+                  <button onclick="voteMember('${kami.id}', 50, event)" class="px-5 py-2.5 rounded-2xl bg-cyber-gold text-black font-mono font-extrabold text-xs hover:scale-105 transition-transform">
+                    ส่งพลัง +50 ⭐ ให้ Kami Oshi
+                  </button>
+                </div>
+              </div>
+            ` : `
+              <div class="text-center py-6">
+                <p class="text-gray-300 text-sm mb-3">คุณยังไม่ได้เลือก Kami Oshi ของคุณ!</p>
+                <button onclick="navigateTo('edn48')" class="px-5 py-2.5 rounded-xl bg-cyber-lime text-black font-bold text-xs">
+                  ไปเลือกเมมเบอร์ EDN48 / TLP48
+                </button>
+              </div>
+            `}
+          </section>
+
+          <!-- MY OSHI LIST (COUNT & MEMBERS) -->
+          <section>
+            <div class="flex items-center justify-between mb-4">
+              <h2 class="font-display font-extrabold text-2xl text-white">💖 MY OSHI LIST (${oshiList.length} คน)</h2>
+              <span class="text-xs text-gray-400">สามารถกดสลับ Kami Oshi ได้จากรายการด้านล่าง</span>
+            </div>
+
+            ${oshiList.length > 0 ? `
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+                ${oshiList.map(m => renderMemberCard(m)).join('')}
+              </div>
+            ` : `
+              <div class="glass-panel rounded-3xl p-8 text-center text-gray-400 text-sm">
+                ยังไม่มีรายชื่อ Oshi กดปุ่ม <span class="text-cyber-pink font-bold">🤍 Oshi</span> บนการ์ดเมมเบอร์เพื่อเพิ่มเข้าลิสต์ของคุณ!
+              </div>
+            `}
+          </section>
+
+          <!-- ACTIVITY & INVENTORY LOGS -->
+          <section class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <!-- Owned Items from Eden Club -->
+            <div class="glass-panel rounded-3xl p-6 border border-white/10">
+              <h3 class="font-display font-bold text-lg text-white mb-4 flex items-center gap-2">
+                <i data-lucide="package" class="w-5 h-5 text-cyber-cyan"></i> ไอเทมที่แลกจาก EDEN CLUB (${appState.ownedItems.length})
+              </h3>
+              ${appState.ownedItems.length > 0 ? `
+                <div class="space-y-2.5 max-h-60 overflow-y-auto pr-1">
+                  ${appState.ownedItems.map(item => `
+                    <div class="p-3 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between">
+                      <div class="flex items-center gap-3">
+                        <span class="text-2xl">${item.emoji}</span>
+                        <div>
+                          <div class="font-bold text-xs sm:text-sm text-white">${item.name}</div>
+                          <div class="text-[11px] font-mono text-gray-400">แลกเมื่อ ${item.purchasedAt}</div>
+                        </div>
+                      </div>
+                      <span class="px-2 py-0.5 rounded bg-cyber-cyan/20 text-cyber-cyan font-mono text-[10px]">OWNED</span>
+                    </div>
+                  `).join('')}
+                </div>
+              ` : `<p class="text-xs text-gray-400">ยังไม่มีไอเทมที่แลกซื้อ ไปช้อปด้วย TOKEN ได้ที่หน้า EDEN CLUB!</p>`}
+            </div>
+
+            <!-- Activity History -->
+            <div class="glass-panel rounded-3xl p-6 border border-white/10">
+              <div class="flex items-center justify-between mb-4">
+                <h3 class="font-display font-bold text-lg text-white flex items-center gap-2">
+                  <i data-lucide="history" class="w-5 h-5 text-cyber-lime"></i> ประวัติการใช้งานล่าสุด
+                </h3>
+                <button onclick="openResetModal()" class="text-xs font-mono text-red-400 hover:text-red-300 underline">
+                  รีเซ็ตค่าเริ่มต้น
+                </button>
+              </div>
+              <div class="space-y-2 max-h-60 overflow-y-auto pr-1">
+                ${appState.history.slice(0, 12).map(h => `
+                  <div class="p-2.5 rounded-xl bg-black/40 border border-white/5 flex items-center justify-between gap-2 text-xs">
+                    <span class="text-gray-200">${h.text}</span>
+                    <span class="font-mono text-[10px] text-gray-500 shrink-0">${h.time}</span>
+                  </div>
+                `).join('')}
+              </div>
+            </div>
+          </section>
+        </div>
+      `;
+    }
+
+    // =========================================================================
+    // 7. INITIALIZE APPLICATION ON LOAD
+    // =========================================================================
+    window.addEventListener('DOMContentLoaded', () => {
+      updateTopBarUI();
+      renderCurrentView();
+    });
+  </script>
+</body>
+</html>
